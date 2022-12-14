@@ -29,7 +29,7 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService{
 //		List<Vaccine> vaccineList = vaccineDao.findAll();
 //		
 //		if(vaccineList.isEmpty()) {
-//			throw new VaccineException("no vaccine found..");
+//			throw new VaccineException("not found..");
 //		}
 //		return vaccineList;
 //	}
