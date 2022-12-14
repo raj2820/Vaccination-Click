@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+
+
 public class GlobalException {
+	
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> anyExpHandler(Exception ie , WebRequest rq){
@@ -20,7 +23,7 @@ public class GlobalException {
 	 err.setMessage(ie.getMessage());
 	 err.setDetails(rq.getDescription(false));
 	 
-return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	 return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	 
 	}
  // to handel not found exception
