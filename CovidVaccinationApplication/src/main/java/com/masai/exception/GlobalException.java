@@ -13,7 +13,6 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 public class GlobalException {
 	
-	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> anyExpHandler(Exception ie , WebRequest rq){
 		
@@ -26,7 +25,6 @@ public class GlobalException {
 	 return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	 
 	}
- // to handel not found exception
  
  public ResponseEntity<MyErrorDetails> mynotFoundHandler(NoHandlerFoundException nfe,WebRequest rq){
 	 
