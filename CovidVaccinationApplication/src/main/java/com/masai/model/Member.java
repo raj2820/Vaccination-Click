@@ -1,16 +1,15 @@
 package com.masai.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.management.loading.PrivateClassLoader;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,30 +19,24 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
 @ToString
-public class Appointment {
-
+public class Member {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private	Integer bookingId;
-	private Long mobileNo;
-	private LocalDateTime dateofbooking=LocalDateTime.now();
+	private Integer memberId;
+	private boolean dose1;
+	private boolean dose2;
+	private LocalDateTime dose1Date;
+	private LocalDateTime dose2Date;
 	
-	@Enumerated
-	private Slots slot;
-	
-	private boolean bookingStatus;
-
-	
-	
-	
-	
-	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member")
+	@JsonManagedReference
+	private IdCard idcard;
 }
