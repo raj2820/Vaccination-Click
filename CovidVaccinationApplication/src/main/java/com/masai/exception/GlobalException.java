@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 public class GlobalException {
-	//to handel any exception
+	//to handle any exception
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> anyExpHandler(Exception ie , WebRequest rq){
 		
@@ -23,7 +23,7 @@ public class GlobalException {
 return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	 
 	}
- // to handel not found exception
+ // to handle not found exception
  
  public ResponseEntity<MyErrorDetails> mynotFoundHandler(NoHandlerFoundException nfe,WebRequest rq){
 	 
@@ -52,16 +52,28 @@ return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
 	 
  }
  
- //member class exception handler
- @ExceptionHandler(MemberException.class)
-	public ResponseEntity<MyErrorDetails> myExpHandler(MemberException ie , WebRequest rq){
-		
-	 MyErrorDetails err=new MyErrorDetails();
-	 err.setTimestamp(LocalDateTime.now());
-	 err.setMessage(ie.getMessage());
-	 err.setDetails(rq.getDescription(false));
-	 
-return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
-	 
-	}
+// //member class exception handler
+// @ExceptionHandler(MemberException.class)
+//	public ResponseEntity<MyErrorDetails> myMemberExpHandler(MemberException ie , WebRequest rq){
+//		
+//	 MyErrorDetails err=new MyErrorDetails();
+//	 err.setTimestamp(LocalDateTime.now());
+//	 err.setMessage(ie.getMessage());
+//	 err.setDetails(rq.getDescription(false));
+//	 
+//return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+//	 
+//	}
+// //member class exception handler
+// @ExceptionHandler(VaccineException.class)
+//	public ResponseEntity<MyErrorDetails> myVaccineExpHandler(VaccineException ie , WebRequest rq){
+//		
+//	 MyErrorDetails err=new MyErrorDetails();
+//	 err.setTimestamp(LocalDateTime.now());
+//	 err.setMessage(ie.getMessage());
+//	 err.setDetails(rq.getDescription(false));
+//	 
+//return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+//	 
+//	}
 }
