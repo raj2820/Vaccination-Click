@@ -10,6 +10,9 @@ import com.masai.exception.AppointmentException;
 import com.masai.model.Appointment;
 import com.masai.repository.AppointmentDao;
 
+
+
+
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
 
