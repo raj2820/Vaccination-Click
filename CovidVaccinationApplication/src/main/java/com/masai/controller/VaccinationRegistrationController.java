@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exception.VaccineRegistrationException;
@@ -17,7 +18,7 @@ public class VaccinationRegistrationController {
 	private VaccineRegistrationService vaccineRegistrationService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<VaccineRegistration> addvaccineRegistrationHandler(VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{
+	public ResponseEntity<VaccineRegistration> addvaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{
 		
 		
 		VaccineRegistration registered = vaccineRegistrationService.addVaccineRegistration(vaccineRegistration);
