@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exception.VaccineInventoryException;
+import com.masai.model.Vaccine;
 import com.masai.model.VaccineInventory;
+import com.masai.repository.VaccineDao;
 import com.masai.repository.VaccineInventoryDao;
 
 
@@ -18,7 +20,8 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 
 	@Autowired
 	private VaccineInventoryDao vaccineInventoryDao;
-	
+	@Autowired
+	private VaccineDao vaccineDao;
 	//@Autowired
 	//private VaccineDao vaccineDao;
 	
@@ -48,9 +51,17 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 	}
 
 	@Override
-	public VaccineInventory addVaccineCount(VaccineInventory vaccineInventory) throws VaccineInventoryException {
+	public VaccineInventory addVaccine(VaccineInventory vaccineInventory ,Integer id) throws VaccineInventoryException {
 		
-		return null;
+	Optional<Vaccine> opt=	vaccineDao.findById(id);
+
+		vaccineInventory.setVaccine(opt.get());
+		
+		return	vaccineInventoryDao.save(vaccineInventory);
+		
+		
+		
+		 
 	}
 
 	@Override
