@@ -31,22 +31,17 @@ import lombok.Setter;
 
 @Data
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 @Entity
 public class VaccineRegistration {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer registrationNo;
 	private Long mobileno;
 	private LocalDate dateofregistration;
 	
-//	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JsonBackReference
-	List<Member> memberList = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL)
+	List<Member> memberList;
 
 	
 	

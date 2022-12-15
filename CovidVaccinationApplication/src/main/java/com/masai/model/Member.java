@@ -47,8 +47,7 @@ public class Member {
 	
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineRegistration vaccineRegistration;
 	
 	

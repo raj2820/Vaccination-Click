@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.masai.model.VaccineRegistration;
 
 @Repository
-public interface VaccineRegistrationDao extends JpaRepository<VaccineRegistration, Integer> {
+public interface VaccineRegistrationDao extends JpaRepository<VaccineRegistration, Long> {
 
 	public VaccineRegistration findByMobileno(long mobileno);
 
