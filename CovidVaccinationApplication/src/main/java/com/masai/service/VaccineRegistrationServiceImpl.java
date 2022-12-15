@@ -1,24 +1,28 @@
-//package com.masai.service;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//
-//import com.masai.exception.VaccineRegistrationException;
-//import com.masai.model.Member;
-//import com.masai.model.VaccineRegistration;
-//import com.masai.repository.MemberDao;
-//import com.masai.repository.VaccineRegistrationDao;
-//
-//public class VaccineRegistrationServiceImpl implements VaccineRegistrationService{
-//	
-//	@Autowired
-//	private VaccineRegistrationDao vaccineRegistrationDao;
-//
-//	@Autowired
-//	private MemberDao memberDao;
-//
+package com.masai.service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.exception.VaccineRegistrationException;
+import com.masai.model.Member;
+import com.masai.model.VaccineRegistration;
+import com.masai.repository.MemberDao;
+import com.masai.repository.VaccineRegistrationDao;
+
+
+@Service
+public class VaccineRegistrationServiceImpl implements VaccineRegistrationService{
+	
+	@Autowired
+	private VaccineRegistrationDao vaccineRegistrationDao;
+
+	@Autowired
+	private MemberDao memberDao;
+
 //	@Override
 //	public VaccineRegistration getVaccineRegistration(long mobileno) throws VaccineRegistrationException {
 //		VaccineRegistration vaccineRegistration = vaccineRegistrationDao.findByMobileno(mobileno);
@@ -29,7 +33,7 @@
 //		}
 //		
 //	}
-//
+
 //	@Override
 //	public List<Member> getAllMemberList() throws VaccineRegistrationException {
 //	
@@ -41,14 +45,16 @@
 //			return member;
 //		}
 //	}
-//
-//	@Override
-//	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException {
-//		
-//		VaccineRegistration addVaccineRegistration = vaccineRegistrationDao.save(reg);
-//
-//		return addVaccineRegistration;
-//	}
+
+	@Override
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException {
+		
+
+		VaccineRegistration addVaccineRegistration = vaccineRegistrationDao.save(reg);
+
+		return addVaccineRegistration;
+	}
+	
 //
 //	@Override
 //	public VaccineRegistration updateVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException {
@@ -60,7 +66,7 @@
 //			throw new VaccineRegistrationException("Invalid Vaccine Registration ");
 //		}
 //	}
-//
+
 //	@Override
 //	public boolean deleteVaccineRegistration(Integer reg) throws VaccineRegistrationException {
 //		Optional<VaccineRegistration> opt = vaccineRegistrationDao.findById(reg);
@@ -74,8 +80,8 @@
 //			return true;
 //		} 
 //	}
-//
-//	
-//
-//}
-//
+
+	
+
+}
+

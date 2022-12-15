@@ -8,5 +8,5 @@ import com.masai.model.Member;
 @Repository
 public interface MemberDao extends JpaRepository<Member, Integer>{
 
-
+	
 }
