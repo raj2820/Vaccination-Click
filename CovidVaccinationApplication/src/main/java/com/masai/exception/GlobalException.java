@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+
+
 public class GlobalException {
 	//to handle any exception
 	@ExceptionHandler(Exception.class)
@@ -20,10 +22,10 @@ public class GlobalException {
 	 err.setMessage(ie.getMessage());
 	 err.setDetails(rq.getDescription(false));
 	 
-return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	 return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	 
 	}
- // to handle not found exception
+
  
  public ResponseEntity<MyErrorDetails> mynotFoundHandler(NoHandlerFoundException nfe,WebRequest rq){
 	 
