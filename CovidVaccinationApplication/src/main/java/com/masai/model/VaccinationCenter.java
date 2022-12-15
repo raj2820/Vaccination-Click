@@ -1,21 +1,30 @@
 package com.masai.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class VaccinationCenter {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vaccineCode;
 	private String centerName;
 	private String address;
 	private String city;
 	private String state;
 	private String pincode;
+	
+//	@JsonIgnore
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private VaccineInventory vaccineInventory;
+	
 	
 	public VaccinationCenter() {
 	
