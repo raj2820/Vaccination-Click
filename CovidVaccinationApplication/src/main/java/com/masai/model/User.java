@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -20,14 +20,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer UserId;
 	
-	@Min(value=4,message="min size should be 4")
+	
 	@NotNull(message="name is mandatory")
 	private String name;
 	
-	
+	@NotNull(message="mobileNo is mandatory")
 	private String mobileNo;
 	
 	@Email
+	@NotNull(message="email is mandatory")
 	private String email;
 	
 	@Column(unique = true)
