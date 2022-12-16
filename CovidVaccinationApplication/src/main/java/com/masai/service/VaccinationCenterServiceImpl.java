@@ -76,9 +76,19 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 	}
 
 	@Override
-	public boolean deleteVaccineCenter(VaccinationCenter vaccineCenter) {
-        
-		Optional<VaccinationCenter> opt=vDao.findById(vaccineCenter.getVaccineCode());
+	public List<VaccinationCenter> getAllVaccineCenter() throws VaccinationCenterException {
+      
+		 List<VaccinationCenter> vc=vDao.findAll();
+		
+		if(vc.size()==0) {
+			throw new VaccinationCenterException("No Vaccination Center Found");
+		}
+		return vc;
+	}
+
+	@Override
+	public boolean deleteVaccineCenter(Integer code) throws VaccinationCenterException {
+         Optional<VaccinationCenter> opt=vDao.findById(code);
 		
 		if(opt.isPresent()) {
 			
@@ -89,7 +99,7 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 			return true;
 		}
 		
-		return false;
+		throw new VaccinationCenterException("Vaccination Center not found by"+" "+code);
 	}
 	
 	

@@ -7,8 +7,9 @@ import com.masai.model.VaccinationCenter;
 
 public interface VaccinationCenterService {
 	
+	public List<VaccinationCenter> getAllVaccineCenter()throws VaccinationCenterException;
 	
-public VaccinationCenter getVaccineCenter(Integer code)throws VaccinationCenterException;
+    public VaccinationCenter getVaccineCenter(Integer code)throws VaccinationCenterException;
 	
 	public List<VaccinationCenter> getVaccineCenterByState(String state)throws VaccinationCenterException;
 	
@@ -18,6 +19,6 @@ public VaccinationCenter getVaccineCenter(Integer code)throws VaccinationCenterE
 	
 	public VaccinationCenter updateVaccineCenter(VaccinationCenter vaccineCenter)throws VaccinationCenterException;
 	
-	public boolean deleteVaccineCenter(VaccinationCenter vaccineCenter);
+	public boolean deleteVaccineCenter(Integer code)throws VaccinationCenterException;
 
 }
