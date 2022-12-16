@@ -1,15 +1,14 @@
 package com.masai.model;
 
 import javax.persistence.Column;
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.Embeddable;
 
 
+@Embeddable
 public class AadharCard {
 	
+
+
 	@Column(unique = true)
 	private Long aadharNo;
 	
@@ -18,11 +17,7 @@ public class AadharCard {
 	
 	@Column(unique = true)
 	private String irisScan;
-
-	public AadharCard() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public Long getAadharNo() {
 		return aadharNo;
@@ -56,4 +51,8 @@ public class AadharCard {
 	}
 	
 	
+	public AadharCard() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

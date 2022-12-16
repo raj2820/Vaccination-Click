@@ -36,21 +36,21 @@ public class IdCardSeviceImpl implements IdCardService{
 		
 	}
 
-	@Override
-	public IdCard getAadharCardNumber(Long aadharNo) throws IdCardException {
-		
-		List<IdCard> cardList = idCardDao.findAll();
-		
-		for(IdCard id : cardList) {
-			if(id.getAadharNo().equals(aadharNo)) {
-
-				return id;
-			}
-		}
-		
-		throw new IdCardException("Please provide correct addharNumber");
-		
-	}
+//	@Override
+//	public IdCard getAadharCardNumber(Long aadharNo) throws IdCardException {
+//		
+//		List<IdCard> cardList = idCardDao.findAll();
+//		
+//		for(IdCard id : cardList) {
+//			if(id.getAadharNo().equals(aadharNo)) {
+//
+//				return id;
+//			}
+//		}
+//		
+//		throw new IdCardException("Please provide correct addharNumber");
+//		
+//	}
 
 	@Override
 	public IdCard addIdCard(IdCard idCard) throws IdCardException {

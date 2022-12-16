@@ -28,14 +28,14 @@ public class IdCardController {
 		return new ResponseEntity<IdCard>(idCard,HttpStatus.OK);
 	}
 	
-	@GetMapping("/getaddhar")
-    public ResponseEntity<IdCard> getAadharCardNumberHandler(@RequestParam Long aadharNo) {
-    	
-        IdCard idCard = idCardService.getAadharCardNumber(aadharNo);
-		
-		return new ResponseEntity<IdCard>(idCard,HttpStatus.OK);
-		
-    }
+//	@GetMapping("/getaddhar")
+//    public ResponseEntity<IdCard> getAadharCardNumberHandler(@RequestParam Long aadharNo) {
+//    	
+//        IdCard idCard = idCardService.getAadharCardNumber(aadharNo);
+//		
+//		return new ResponseEntity<IdCard>(idCard,HttpStatus.OK);
+//		
+//    }
 	
 	
 	@PostMapping("/addcard")

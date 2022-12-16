@@ -29,6 +29,7 @@ import lombok.ToString;
 
 public class Member {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer memberId;
@@ -37,14 +38,16 @@ public class Member {
 	private LocalDateTime dose1Date;
 	private LocalDateTime dose2Date;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member")
-	@JsonManagedReference
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member")
+//	@JsonManagedReference
+
+	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member",fetch = FetchType.EAGER)
 	private IdCard idcard;
 	
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private VaccineRegistration vaccineRegistration;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	private VaccineRegistration vaccineRegistration;
 
 
 
@@ -120,47 +123,15 @@ public class Member {
 
 
 
-	public VaccineRegistration getVaccineRegistration() {
-		return vaccineRegistration;
-	}
-
-
-
-	public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
-		this.vaccineRegistration = vaccineRegistration;
-	}
-
-
-
-	public Member() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Member(Integer memberId, boolean dose1, boolean dose2, LocalDateTime dose1Date, LocalDateTime dose2Date,
-			IdCard idcard, VaccineRegistration vaccineRegistration) {
-		super();
-		this.memberId = memberId;
-		this.dose1 = dose1;
-		this.dose2 = dose2;
-		this.dose1Date = dose1Date;
-		this.dose2Date = dose2Date;
-		this.idcard = idcard;
-		this.vaccineRegistration = vaccineRegistration;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Member [memberId=" + memberId + ", dose1=" + dose1 + ", dose2=" + dose2 + ", dose1Date=" + dose1Date
-				+ ", dose2Date=" + dose2Date + ", idcard=" + idcard + ", vaccineRegistration=" + vaccineRegistration
-				+ "]";
-	}
-	
-	
+//	public VaccineRegistration getVaccineRegistration() {
+//		return vaccineRegistration;
+//	}
+//
+//
+//
+//	public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
+//		this.vaccineRegistration = vaccineRegistration;
+//	}
 	
 	
 	
