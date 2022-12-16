@@ -12,7 +12,7 @@ public interface VaccineRegistrationService {
 
 //	public VaccineRegistration getVaccineRegistration(long moblieno)throws VaccineRegistrationException;
 //
-//	public List<Member> getAllMemberList()throws VaccineRegistrationException;
+	public List<Member> getAllMemberList()throws VaccineRegistrationException;
 
 	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg)throws VaccineRegistrationException;
 

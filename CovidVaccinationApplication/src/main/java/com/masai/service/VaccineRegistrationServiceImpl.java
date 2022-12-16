@@ -34,17 +34,17 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 //		
 //	}
 
-//	@Override
-//	public List<Member> getAllMemberList() throws VaccineRegistrationException {
-//	
-//		List<Member> member = memberDao.findAll();
-//
-//		if (member.size() == 0) {
-//			throw new VaccineRegistrationException("No memeber Found");
-//		} else {
-//			return member;
-//		}
-//	}
+	@Override
+	public List<Member> getAllMemberList() throws VaccineRegistrationException {
+	
+		List<Member> member = memberDao.findAll();
+
+		if (member.size() == 0) {
+			throw new VaccineRegistrationException("No memeber Found");
+		} else {
+			return member;
+		}
+	}
 
 	@Override
 	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException {

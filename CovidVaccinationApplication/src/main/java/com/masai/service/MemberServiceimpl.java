@@ -20,5 +20,7 @@ public class MemberServiceimpl implements MemberService{
 		
 		return	memberDao.save(member);
 	}
+	
+	
 
 }

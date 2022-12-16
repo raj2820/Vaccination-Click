@@ -22,12 +22,7 @@ import lombok.ToString;
 
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@ToString
+
 public class Appointment {
 
 	@Id
@@ -40,6 +35,67 @@ public class Appointment {
 	private Slots slot;
 	
 	private boolean bookingStatus;
+
+	public Appointment() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
+	}
+
+	public Long getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(Long mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public LocalDateTime getDateofbooking() {
+		return dateofbooking;
+	}
+
+	public void setDateofbooking(LocalDateTime dateofbooking) {
+		this.dateofbooking = dateofbooking;
+	}
+
+	public Slots getSlot() {
+		return slot;
+	}
+
+	public void setSlot(Slots slot) {
+		this.slot = slot;
+	}
+
+	public boolean isBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(boolean bookingStatus) {
+		this.bookingStatus = bookingStatus;
+	}
+
+	public Appointment(Integer bookingId, Long mobileNo, LocalDateTime dateofbooking, Slots slot,
+			boolean bookingStatus) {
+		super();
+		this.bookingId = bookingId;
+		this.mobileNo = mobileNo;
+		this.dateofbooking = dateofbooking;
+		this.slot = slot;
+		this.bookingStatus = bookingStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment [bookingId=" + bookingId + ", mobileNo=" + mobileNo + ", dateofbooking=" + dateofbooking
+				+ ", slot=" + slot + ", bookingStatus=" + bookingStatus + "]";
+	}
 
 	
 	
