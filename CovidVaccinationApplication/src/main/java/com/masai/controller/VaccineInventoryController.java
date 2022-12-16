@@ -41,10 +41,10 @@ public class VaccineInventoryController {
 		return new ResponseEntity<VaccineInventory>(vaccineInventory,HttpStatus.FOUND);
 	}
 	
-	@PostMapping("/addvaccine/{id}")
-	public ResponseEntity<VaccineInventory> addVaccineHandler(@RequestBody VaccineInventory vaccineInventory ,@PathVariable("id") Integer id){
+	@PostMapping("/addvaccine/{id}/{vcid}")
+	public ResponseEntity<VaccineInventory> addVaccineHandler(@RequestBody VaccineInventory vaccineInventory ,@PathVariable("id") Integer id ,@PathVariable("vcid") Integer vcid){
 		
-		VaccineInventory Inventory =  vaccineInventoryServise.addVaccine(vaccineInventory, id);
+		VaccineInventory Inventory =  vaccineInventoryServise.addVaccine(vaccineInventory, id,vcid);
 		
 		
 		return new ResponseEntity<VaccineInventory>(Inventory,HttpStatus.OK);

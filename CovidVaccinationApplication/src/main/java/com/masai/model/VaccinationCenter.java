@@ -2,16 +2,20 @@ package com.masai.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class VaccinationCenter {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vaccineCode;
@@ -21,9 +25,9 @@ public class VaccinationCenter {
 	private String state;
 	private String pincode;
 	
-//	@JsonIgnore
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private VaccineInventory vaccineInventory;
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private VaccineInventory vaccineInventory;
 	
 	
 	public VaccinationCenter() {

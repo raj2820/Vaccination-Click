@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exception.VaccineInventoryException;
+import com.masai.model.VaccinationCenter;
 import com.masai.model.Vaccine;
 import com.masai.model.VaccineInventory;
+import com.masai.repository.VaccinationCenterDao;
 import com.masai.repository.VaccineDao;
 import com.masai.repository.VaccineInventoryDao;
 
@@ -24,7 +26,8 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 	private VaccineDao vaccineDao;
 	//@Autowired
 	//private VaccineDao vaccineDao;
-	
+	@Autowired
+	private VaccinationCenterDao vaccinationCenterDao;
 	@Override
 	public List<VaccineInventory> allVaccineInventory() throws VaccineInventoryException{
 		
@@ -51,10 +54,11 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 	}
 
 	@Override
-	public VaccineInventory addVaccine(VaccineInventory vaccineInventory ,Integer id) throws VaccineInventoryException {
+	public VaccineInventory addVaccine(VaccineInventory vaccineInventory ,Integer id,Integer vcid) throws VaccineInventoryException {
 		
 	Optional<Vaccine> opt=	vaccineDao.findById(id);
-
+Optional<VaccinationCenter> vc=vaccinationCenterDao.findById(vcid);
+	
 		vaccineInventory.setVaccine(opt.get());
 		
 		return	vaccineInventoryDao.save(vaccineInventory);
