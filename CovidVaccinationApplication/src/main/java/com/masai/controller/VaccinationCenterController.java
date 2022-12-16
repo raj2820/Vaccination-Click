@@ -25,21 +25,11 @@ import com.masai.model.VaccinationCenter;
 import com.masai.service.VaccinationCenterService;
 
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-@RestController
-public class VaccinationCenterController {
 
-	@Autowired
-	private VaccinationCenterService vaccinationCenterService;
-	
-	@PostMapping("/vcregister")
-	public ResponseEntity<VaccinationCenter> addVaccinationCenter(@RequestBody VaccinationCenter vaccinationCenter) throws VaccinationCenterException{
-		
-		VaccinationCenter vc =	vaccinationCenterService.addVaccineCenter(vaccinationCenter);
-		
-		return new ResponseEntity<VaccinationCenter>(vc,HttpStatus.CREATED);
-	}
+
+
+
 	
 	
 
@@ -114,7 +104,16 @@ public class VaccinationCenterController {
 		
 	}
 
+	@Autowired
+	private VaccinationCenterService vaccinationCenterService;
 	
+	@PostMapping("/vcregister")
+	public ResponseEntity<VaccinationCenter> addVaccinationCenter(@RequestBody VaccinationCenter vaccinationCenter) throws VaccinationCenterException{
+		
+		VaccinationCenter vc =	vaccinationCenterService.addVaccineCenter(vaccinationCenter);
+		
+		return new ResponseEntity<VaccinationCenter>(vc,HttpStatus.CREATED);
+	}
 	
 
 
