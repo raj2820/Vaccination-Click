@@ -14,7 +14,7 @@ public interface VaccinationInventoryService {
 	
 	public VaccineInventory getVaccineInventoryByCenter(int CenterId)throws VaccineInventoryException;
 	
-	public VaccineInventory addVaccineCount(VaccineInventory vaccineInventory)throws VaccineInventoryException;
+public VaccineInventory addVaccine(VaccineInventory vaccineInventory,Integer id)throws VaccineInventoryException;
 	
 	public VaccineInventory updateVaccineInventory(VaccineInventory vaccineInventory)throws VaccineInventoryException;
 	
@@ -24,4 +24,5 @@ public interface VaccinationInventoryService {
 	
 	//public List<VaccineInventory> getVaccineInventory(Vaccine vaccine)throws VaccineInventoryException;
 
+	
 }
