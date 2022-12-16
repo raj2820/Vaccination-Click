@@ -14,8 +14,8 @@ import com.masai.model.User;
 import com.masai.repository.CurrentUserSessionDao;
 import com.masai.repository.UserDao;
 
+import net.bytebuddy.utility.RandomString;
 
-//import net.bytebuddy.utility.RandomString;
 @Service
 public class LoginServiceImpl implements LoginService{
 
@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService{
 		User existingUser =  userDao.findByMobileNo(loginDto.getMobileNo());
 		
 		if(existingUser == null) {
-			throw new LoginException("Please Enter a valid Mobile Number");
+			throw new LoginException("Please Enter a valid Mobile Number, First create account then login");
 		}
 		
 		Optional<CurrentUserSession> ValidUsersessionOpt = currentUser.findById(existingUser.getUserId());
@@ -45,10 +45,9 @@ public class LoginServiceImpl implements LoginService{
 		
 		if(existingUser.getPassword().equals(loginDto.getPassword())) {
 			
-//			String key = RandomString.make(6);
+			String key = RandomString.make(6);
 			
-			//dummy data used*****************************
-			String key = "123";
+
 			CurrentUserSession currentUsersession = new CurrentUserSession(existingUser.getUserId(),key,LocalDateTime.now());
 			
 		    

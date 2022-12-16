@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/saveuser")
+	@PostMapping("/signup")
 	public ResponseEntity<User> saveUser(@RequestBody User user){
 		User savedUser = userService.createUser(user);
 		
