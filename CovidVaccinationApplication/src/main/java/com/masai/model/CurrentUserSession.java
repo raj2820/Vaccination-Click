@@ -13,10 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+
 public class CurrentUserSession {
 	
 	@Id
@@ -26,5 +23,43 @@ public class CurrentUserSession {
 	private String uuid;
 	
 	private LocalDateTime localDtaeTime;
+
+	public CurrentUserSession() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDtaeTime) {
+		super();
+		this.userId = userId;
+		this.uuid = uuid;
+		this.localDtaeTime = localDtaeTime;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public LocalDateTime getLocalDtaeTime() {
+		return localDtaeTime;
+	}
+
+	public void setLocalDtaeTime(LocalDateTime localDtaeTime) {
+		this.localDtaeTime = localDtaeTime;
+	}
+	
+	
 
 }

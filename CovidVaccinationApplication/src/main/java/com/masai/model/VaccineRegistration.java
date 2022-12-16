@@ -29,9 +29,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class VaccineRegistration {
 	
@@ -42,6 +39,51 @@ public class VaccineRegistration {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Member> memberList;
+
+	public Long getMobileno() {
+		return mobileno;
+	}
+
+	public void setMobileno(Long mobileno) {
+		this.mobileno = mobileno;
+	}
+
+	public LocalDate getDateofregistration() {
+		return dateofregistration;
+	}
+
+	public void setDateofregistration(LocalDate dateofregistration) {
+		this.dateofregistration = dateofregistration;
+	}
+
+	public List<Member> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<Member> memberList) {
+		this.memberList = memberList;
+	}
+
+	public VaccineRegistration() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public VaccineRegistration(Long mobileno, LocalDate dateofregistration, List<Member> memberList) {
+		super();
+		this.mobileno = mobileno;
+		this.dateofregistration = dateofregistration;
+		this.memberList = memberList;
+	}
+
+	@Override
+	public String toString() {
+		return "VaccineRegistration [mobileno=" + mobileno + ", dateofregistration=" + dateofregistration
+				+ ", memberList=" + memberList + "]";
+	}
+	
+	
+	
 
 	
 	

@@ -24,11 +24,7 @@ import lombok.Setter;
 
 
 
-@Data
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class VaccineInventory {
 	
@@ -41,10 +37,55 @@ public class VaccineInventory {
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Vaccine vaccine;
+
+	public VaccineInventory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public VaccineInventory(Integer inventoryId, LocalDate localDate, Vaccine vaccine) {
+		super();
+		InventoryId = inventoryId;
+		this.localDate = localDate;
+		this.vaccine = vaccine;
+	}
+
+	public Integer getInventoryId() {
+		return InventoryId;
+	}
+
+	public void setInventoryId(Integer inventoryId) {
+		InventoryId = inventoryId;
+	}
+
+	public LocalDate getLocalDate() {
+		return localDate;
+	}
+
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
+	}
+
+	public Vaccine getVaccine() {
+		return vaccine;
+	}
+
+	public void setVaccine(Vaccine vaccine) {
+		this.vaccine = vaccine;
+	}
+
+	@Override
+	public String toString() {
+		return "VaccineInventory [InventoryId=" + InventoryId + ", localDate=" + localDate + ", vaccine=" + vaccine
+				+ "]";
+	}
 	
 //	@JsonIgnore
 //	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 //	private List<VaccinationCenter> vaccinationCenter;
+	
+	
+	
 
 	
 	
