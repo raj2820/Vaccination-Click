@@ -21,6 +21,13 @@ public class LoginDTO {
 		this.password = password;
 	}
 	
+	public LoginDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 //	private String role;
 	
 	

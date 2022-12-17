@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.masai.exception.AppointmentException;
 import com.masai.model.Appointment;
+import com.masai.model.Member;
+import com.masai.model.VaccinationCenter;
+import com.masai.model.VaccineRegistration;
 import com.masai.repository.AppointmentDao;
+import com.masai.repository.MemberDao;
+import com.masai.repository.VaccinationCenterDao;
+import com.masai.repository.VaccineRegistrationDao;
 
 
 
@@ -18,6 +24,16 @@ public class AppointmentServiceImpl implements AppointmentService{
 
 	@Autowired
 	private AppointmentDao appointmentDao;
+	
+	@Autowired
+	private MemberDao memberDao;
+	
+	@Autowired
+	private VaccineRegistrationDao vaccineRegistrationDao;
+	
+	@Autowired
+	private VaccinationCenterDao vaccinationCenterDao;
+
 	
 	@Override
 	public List<Appointment> getAllAppointments() {
@@ -35,7 +51,40 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment addAppointment(Appointment appointment) {
+	public Appointment addAppointment(Appointment appointment,Integer id) {
+		
+		
+		VaccinationCenter center=null;
+	//List<Member> members =	memberDao.getAllMemberByPhone(appointment.getMobileNo());
+		Optional<VaccineRegistration> vc =vaccineRegistrationDao.findById(appointment.getMobileNo());
+	
+	Member member =	memberDao.findById(id).get();
+		appointment.setMember(member);
+		
+		
+		
+		
+		
+		
+		List<VaccinationCenter> centerList =	vaccinationCenterDao.findAll();
+		
+		for (VaccinationCenter vaccinationCenter : centerList) {
+			
+			if(member.getIdcard().getCity().equals(vaccinationCenter.getCity())) {
+				
+				center=vaccinationCenter;
+				
+			
+				break;
+			
+			}
+			
+		}
+		
+		
+		
+	appointment.setVaccinationCenter(center);
+	
 		 return appointmentDao.save(appointment);
 	}
 

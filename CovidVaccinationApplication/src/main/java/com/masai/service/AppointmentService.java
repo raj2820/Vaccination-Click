@@ -11,7 +11,7 @@ public interface AppointmentService {
 	
 	public Appointment getAppointment(Integer bookingId) throws AppointmentException;
 	
-	public Appointment addAppointment(Appointment appointment) throws AppointmentException;
+	public Appointment addAppointment(Appointment appointment,Integer id) throws AppointmentException;
 	
 	public Appointment updateAppointment(Appointment appointment) throws AppointmentException;
 	
