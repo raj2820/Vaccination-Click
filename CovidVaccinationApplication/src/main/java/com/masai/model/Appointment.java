@@ -1,23 +1,22 @@
 package com.masai.model;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
-import javax.management.loading.PrivateClassLoader;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 
@@ -25,15 +24,31 @@ import lombok.ToString;
 
 public class Appointment {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private	Integer bookingId;
 	private Long mobileNo;
 	private LocalDateTime dateofbooking=LocalDateTime.now();
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Member member;
 	@Enumerated
 	private Slots slot;
 	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private VaccinationCenter vaccinationCenter;
+	
+	public VaccinationCenter getVaccinationCenter() {
+		return vaccinationCenter;
+	}
+
+	public void setVaccinationCenter(VaccinationCenter vaccinationCenter) {
+		this.vaccinationCenter = vaccinationCenter;
+	}
+
 	private boolean bookingStatus;
 
 	public Appointment() {
@@ -96,6 +111,15 @@ public class Appointment {
 		return "Appointment [bookingId=" + bookingId + ", mobileNo=" + mobileNo + ", dateofbooking=" + dateofbooking
 				+ ", slot=" + slot + ", bookingStatus=" + bookingStatus + "]";
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 
 	
 	
