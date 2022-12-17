@@ -1,5 +1,7 @@
 package com.masai.model;
 
+import java.util.Random;
+
 public enum Slots {
 	slot1,
 	slot2,
@@ -9,6 +11,13 @@ public enum Slots {
 	slot6,
 	slot7,
 	slot8,
-	slot9
+	slot9;
+
+	public static Slots getRandomSlot() {
+        Random random = new Random();
+        return values()[random.nextInt(values().length)];
+    }
+	public Boolean[] map = new Boolean[9];
+
 	
 }
