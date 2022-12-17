@@ -7,11 +7,13 @@ import com.masai.model.Appointment;
 
 public interface AppointmentService {
 	
-	public List<Appointment> getAllAppointments();
+public List<Appointment> getAllAppointments();
 	
 	public Appointment getAppointment(Integer bookingId) throws AppointmentException;
 	
-	public Appointment addAppointment(Appointment appointment) throws AppointmentException;
+	public Appointment addAppointment(Appointment appointment,Integer id) throws AppointmentException;
+	
+	//public List<VaccinationCenter> addAppointment() throws AppointmentException;
 	
 	public Appointment updateAppointment(Appointment appointment) throws AppointmentException;
 	

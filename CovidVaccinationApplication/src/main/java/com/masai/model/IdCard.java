@@ -3,22 +3,14 @@ package com.masai.model;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 
@@ -35,18 +27,12 @@ public class IdCard {
 	private String pincode;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-//	@JsonBackReference
 	@JsonIgnore
 	private Member member;
 	
-	
-	//@OneToOne(cascade = CascadeType.ALL)
 	@Embedded
 	private AadharCard adharcard;
-	
-	
 
-	//@OneToOne(cascade = CascadeType.ALL)
 	@Embedded
 	private PanCard panCard;
 	
@@ -73,9 +59,6 @@ public class IdCard {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
 
 
 	public IdCard(Integer id, String name, LocalDate dob, String gender, String city, String state, String pincode,
@@ -188,6 +171,9 @@ public class IdCard {
 		this.pincode = pincode;
 	}
 
+
+	
+	
 
 	
 }

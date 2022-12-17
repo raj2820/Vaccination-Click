@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Member;
@@ -15,13 +16,14 @@ import com.masai.service.MemberService;
 @RestController
 public class MemberController {
 	
+
 	@Autowired
 	private MemberService ms;
 	
 	@PostMapping("/members")
-	public ResponseEntity<Member> registerMember(@RequestBody Member member){
+	public ResponseEntity<Member> registerMember(@RequestBody Member member ,@RequestParam("phone") Long phone){
 		
-		Member m =	ms.addMember(member);
+		Member m =	ms.addMember(member,phone);
 			
 		return new ResponseEntity<Member>(m,HttpStatus.CREATED);
 	
@@ -35,7 +37,7 @@ public class MemberController {
 		return new ResponseEntity<Member>(m,HttpStatus.OK);
 		
 	}
-//	
+
 	@GetMapping("/memberByAdhar/{adharNo}")
 	public ResponseEntity<Member> getMemberByAdhar(@PathVariable("adharNo") Long adhar){
 		
@@ -52,4 +54,7 @@ public class MemberController {
 		return new ResponseEntity<Member>(m,HttpStatus.OK);
 		
 	}
+	
+
+	
 }

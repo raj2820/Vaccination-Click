@@ -1,6 +1,7 @@
 package com.masai.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,24 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-
 
 @Entity
 
 public class Member {
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer memberId;
@@ -38,18 +26,19 @@ public class Member {
 	private LocalDateTime dose1Date;
 	private LocalDateTime dose2Date;
 	
-//	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member")
-//	@JsonManagedReference
+
 
 	@OneToOne(cascade = CascadeType.ALL,mappedBy ="member",fetch = FetchType.EAGER)
 	private IdCard idcard;
 	
 	
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	private VaccineRegistration vaccineRegistration;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private VaccineRegistration vaccineRegistration;
 
-
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="member")
+	private List<Appointment> appointments;
 
 	public Integer getMemberId() {
 		return memberId;
@@ -123,15 +112,27 @@ public class Member {
 
 
 
-//	public VaccineRegistration getVaccineRegistration() {
-//		return vaccineRegistration;
-//	}
-//
-//
-//
-//	public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
-//		this.vaccineRegistration = vaccineRegistration;
-//	}
+	public VaccineRegistration getVaccineRegistration() {
+		return vaccineRegistration;
+	}
+
+
+
+	public void setVaccineRegistration(VaccineRegistration vaccineRegistration) {
+		this.vaccineRegistration = vaccineRegistration;
+	}
+
+
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 	
 	
 	

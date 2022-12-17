@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.masai.model.IdCard;
 import com.masai.model.Member;
+import com.masai.model.VaccineRegistration;
 import com.masai.repository.IdCardDao;
 import com.masai.repository.MemberDao;
+import com.masai.repository.VaccineRegistrationDao;
 
 @Service
 public class MemberServiceimpl implements MemberService{
@@ -18,10 +20,13 @@ public class MemberServiceimpl implements MemberService{
 	
 	@Autowired
 	private IdCardDao idCardDao;
-	@Override
-	public Member addMember(Member member) {
 	
-		
+	@Autowired
+	private VaccineRegistrationDao vaccineRegistrationDao;
+	@Override
+	public Member addMember(Member member ,Long phone) {
+		Optional<VaccineRegistration> optphone = vaccineRegistrationDao.findById(phone);
+		member.setVaccineRegistration(optphone.get());
 		return	memberDao.save(member);
 	}
 
@@ -52,6 +57,7 @@ public class MemberServiceimpl implements MemberService{
 		return id.get().getMember();
 		
 	}
+
 
 
 }
