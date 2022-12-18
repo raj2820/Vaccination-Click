@@ -6,8 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.LoginException;
 import com.masai.exception.VaccineException;
+import com.masai.model.CurrentAdminSession;
 import com.masai.model.Vaccine;
+import com.masai.repository.AdminSessionDao;
+import com.masai.repository.CurrentUserSessionDao;
+import com.masai.repository.UserDao;
+import com.masai.repository.VaccinationCenterDao;
 import com.masai.repository.VaccineDao;
 import com.masai.repository.VaccineInventoryDao;
 
@@ -17,13 +23,35 @@ public class VaccineServiceImpl implements VaccineService{
 	private VaccineDao vdao;
 	
 	
+	@Autowired
+	private CurrentUserSessionDao currentUserSessionDao;
 	
+	@Autowired
+	private AdminSessionDao adminSessionDao;
+
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private AdminSessionDao adminDao;
+	
+	@Autowired
+	private VaccinationCenterDao vDao;
 	
 	@Override
-	public Vaccine addVaccine(Vaccine vaccine) {
+	public Vaccine addVaccine(Vaccine vaccine ,String key)throws LoginException {
+	
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
+		
 		Vaccine savedvaccine=vdao.save(vaccine);
-//		VaccineCount count=vaccine.getVaccineCount();
-//		count.setVaccine(savedvaccine);
+
 		return savedvaccine;
 		
 	}
@@ -61,7 +89,17 @@ public class VaccineServiceImpl implements VaccineService{
 
 
 	@Override
-	public boolean deleteVaccine(Vaccine vaccine) throws VaccineException {
+	public boolean deleteVaccine(Vaccine vaccine ,String key) throws VaccineException ,LoginException{
+		
+		
+	CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
 		
 	Optional<Vaccine> deletedvaccine =	Optional.empty();
 		
@@ -87,6 +125,36 @@ public class VaccineServiceImpl implements VaccineService{
 		else {
 			return vaccines;
 		}
+	}
+
+
+
+
+	@Override
+	public Vaccine updateVaccine(Vaccine vaccine,String key) throws VaccineException ,LoginException{
+	
+		
+		
+	CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
+		Optional<Vaccine> opt=vdao.findById(vaccine.getVaccineId());
+		 if(!opt.isPresent()) {
+			 throw new VaccineException("Vaccine not present with vaccine id");
+		 }
+		Vaccine uvaccine =opt.get();
+		
+		uvaccine.setVaccineId(vaccine.getVaccineId());
+		uvaccine.setDescription(vaccine.getDescription());
+		uvaccine.setVaccineCount(vaccine.getVaccineCount());
+		uvaccine.setVaccineName(vaccine.getVaccineName());
+		
+		return uvaccine;
 	}
 
 }

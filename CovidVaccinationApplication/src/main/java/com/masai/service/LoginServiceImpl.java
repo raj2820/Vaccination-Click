@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.masai.model.CurrentUserSession;
 import com.masai.model.LoginDTO;
 import com.masai.model.User;
+import com.masai.repository.AdminDao;
 import com.masai.repository.CurrentUserSessionDao;
 import com.masai.repository.UserDao;
 
@@ -24,6 +25,8 @@ public class LoginServiceImpl implements LoginService{
 
 	    @Autowired
 	    private CurrentUserSessionDao sessionDao;
+		
+		
 
 		@Override
 		public String logIntoAccount(LoginDTO dto) throws LoginException {

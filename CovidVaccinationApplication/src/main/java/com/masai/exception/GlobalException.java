@@ -54,28 +54,28 @@ return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
 	 
  }
  
-// //member class exception handler
-// @ExceptionHandler(MemberException.class)
-//	public ResponseEntity<MyErrorDetails> myMemberExpHandler(MemberException ie , WebRequest rq){
-//		
-//	 MyErrorDetails err=new MyErrorDetails();
-//	 err.setTimestamp(LocalDateTime.now());
-//	 err.setMessage(ie.getMessage());
-//	 err.setDetails(rq.getDescription(false));
-//	 
-//return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
-//	 
-//	}
-// //member class exception handler
-// @ExceptionHandler(VaccineException.class)
-//	public ResponseEntity<MyErrorDetails> myVaccineExpHandler(VaccineException ie , WebRequest rq){
-//		
-//	 MyErrorDetails err=new MyErrorDetails();
-//	 err.setTimestamp(LocalDateTime.now());
-//	 err.setMessage(ie.getMessage());
-//	 err.setDetails(rq.getDescription(false));
-//	 
-//return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
-//	 
-//	}
+ //member class exception handler
+ @ExceptionHandler(MemberException.class)
+	public ResponseEntity<MyErrorDetails> myMemberExpHandler(MemberException ie , WebRequest rq){
+		
+	 MyErrorDetails err=new MyErrorDetails();
+	 err.setTimestamp(LocalDateTime.now());
+	 err.setMessage(ie.getMessage());
+	 err.setDetails(rq.getDescription(false));
+	 
+return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	 
+	}
+ //member class exception handler
+ @ExceptionHandler(VaccineException.class)
+	public ResponseEntity<MyErrorDetails> myVaccineExpHandler(VaccineException ie , WebRequest rq){
+		
+	 MyErrorDetails err=new MyErrorDetails();
+	 err.setTimestamp(LocalDateTime.now());
+	 err.setMessage(ie.getMessage());
+	 err.setDetails(rq.getDescription(false));
+	 
+return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	 
+	}
 }

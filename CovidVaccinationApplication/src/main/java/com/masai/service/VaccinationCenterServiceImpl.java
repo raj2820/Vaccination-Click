@@ -6,15 +6,30 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.LoginException;
 import com.masai.exception.VaccinationCenterException;
+import com.masai.model.CurrentAdminSession;
 import com.masai.model.VaccinationCenter;
+import com.masai.repository.AdminSessionDao;
+import com.masai.repository.CurrentUserSessionDao;
+import com.masai.repository.UserDao;
 import com.masai.repository.VaccinationCenterDao;
 
 
 @Service
 public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 	
+	@Autowired
+	private CurrentUserSessionDao currentUserSessionDao;
 	
+	@Autowired
+	private AdminSessionDao adminSessionDao;
+
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private AdminSessionDao adminDao;
 	
 	@Autowired
 	private VaccinationCenterDao vDao;
@@ -52,7 +67,15 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 	}
 
 	@Override
-	public VaccinationCenter addVaccineCenter(VaccinationCenter vaccineCenter) {
+	public VaccinationCenter addVaccineCenter(VaccinationCenter vaccineCenter,String key)throws LoginException {
+		
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
 		
 		VaccinationCenter vc=vDao.save(vaccineCenter);
 		
@@ -60,8 +83,16 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 	}
 
 	@Override
-	public VaccinationCenter updateVaccineCenter(VaccinationCenter vaccineCenter) throws VaccinationCenterException {
+	public VaccinationCenter updateVaccineCenter(VaccinationCenter vaccineCenter,String key) throws VaccinationCenterException ,LoginException{
          
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
 		Optional<VaccinationCenter> opt=vDao.findById(vaccineCenter.getVaccineCode());
 		
 		if(opt.isPresent()) {
@@ -87,8 +118,18 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService{
 	}
 
 	@Override
-	public boolean deleteVaccineCenter(Integer code) throws VaccinationCenterException {
-         Optional<VaccinationCenter> opt=vDao.findById(code);
+	public boolean deleteVaccineCenter(Integer code,String key) throws VaccinationCenterException ,LoginException {
+         
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
+		
+		Optional<VaccinationCenter> opt=vDao.findById(code);
 		
 		if(opt.isPresent()) {
 			

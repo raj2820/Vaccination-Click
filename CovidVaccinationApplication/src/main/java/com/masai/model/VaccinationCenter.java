@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,10 +21,15 @@ public class VaccinationCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vaccineCode;
+	@NotNull(message="Center Name should not be empty")
 	private String centerName;
+	@NotNull(message="Address Name should not be empty")
 	private String address;
+	@NotNull(message="City Name should not be empty")
 	private String city;
+	@NotNull(message="State Name should not be empty")
 	private String state;
+	@NotNull(message="Pincode Name should not be empty")
 	private String pincode;
 	
 	@JsonIgnore
