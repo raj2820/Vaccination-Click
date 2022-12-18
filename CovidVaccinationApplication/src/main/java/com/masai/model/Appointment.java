@@ -1,6 +1,7 @@
 package com.masai.model;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -18,24 +19,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-
-
-
 @Entity
-
 public class Appointment {
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private	Integer bookingId;
-	@NotNull
-	@Size(min = 9  , max = 10 , message = "Please Enter Valid Phone Number ")
+	
 	private Long mobileNo;
 	
-	
 	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private LocalDateTime dateofbooking;
+	private LocalDate dateofbooking;
 	
 	
 	@JsonIgnore
@@ -79,11 +74,12 @@ public class Appointment {
 		this.mobileNo = mobileNo;
 	}
 
-	public LocalDateTime getDateofbooking() {
+	
+	public LocalDate getDateofbooking() {
 		return dateofbooking;
 	}
 
-	public void setDateofbooking(LocalDateTime dateofbooking) {
+	public void setDateofbooking(LocalDate dateofbooking) {
 		this.dateofbooking = dateofbooking;
 	}
 
@@ -103,13 +99,19 @@ public class Appointment {
 		this.bookingStatus = bookingStatus;
 	}
 
-	public Appointment(Integer bookingId, Long mobileNo, LocalDateTime dateofbooking, Slots slot,
+	
+
+	public Appointment(Integer bookingId,
+			@NotNull @Size(min = 9, max = 10, message = "Please Enter Valid Phone Number ") Long mobileNo,
+			LocalDate dateofbooking, Member member, Slots slot, VaccinationCenter vaccinationCenter,
 			boolean bookingStatus) {
 		super();
 		this.bookingId = bookingId;
 		this.mobileNo = mobileNo;
 		this.dateofbooking = dateofbooking;
+		this.member = member;
 		this.slot = slot;
+		this.vaccinationCenter = vaccinationCenter;
 		this.bookingStatus = bookingStatus;
 	}
 
@@ -126,11 +128,6 @@ public class Appointment {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-
-
-	
-	
-	
 	
 	
 }

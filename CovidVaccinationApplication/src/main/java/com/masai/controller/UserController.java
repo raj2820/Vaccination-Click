@@ -42,7 +42,7 @@ public class UserController {
 	 @Autowired
 	    private UserService userService;
 
-	    @PostMapping("/users")
+	    @PostMapping("/1_users")
 	    public ResponseEntity<User> saveUserHandler(@Valid @RequestBody User user) throws UserException {
 
 	        User savedUser= userService.createUser(user);
@@ -51,7 +51,7 @@ public class UserController {
 	        return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
 	    }
 
-	    @PutMapping("/users")
+	    @PutMapping("/1_users")
 	    public  ResponseEntity<User> updateUserHandler(@Valid @RequestBody User user,@RequestParam(required = false ) String key ) throws UserException {
 
 
@@ -68,7 +68,7 @@ public class UserController {
 		@Autowired
 		private MemberService ms;
 		
-		@PostMapping("/members")
+		@PostMapping("/2_members")
 		public ResponseEntity<Member> registerMember(@Valid @RequestBody Member member ,@RequestParam("phone") Long phone , @RequestParam("key") String key) throws LoginException{
 			
 			Member m =	ms.addMember(member,phone,key);
@@ -77,7 +77,7 @@ public class UserController {
 		
 		}
 		
-		@GetMapping("/memberById/{id}")
+		@GetMapping("/2_memberById/{id}")
 		public ResponseEntity<Member> getMemberById(@PathVariable("id") Integer id){
 			
 			Member m=ms.getMemberById(id);
@@ -86,7 +86,7 @@ public class UserController {
 			
 		}
 
-		@GetMapping("/memberByAdhar/{adharNo}")
+		@GetMapping("/2_memberByAdhar/{adharNo}")
 		public ResponseEntity<Member> getMemberByAdhar(@PathVariable("adharNo") Long adhar){
 			
 			Member m=ms.getMemberByAdharNo(adhar);
@@ -94,7 +94,7 @@ public class UserController {
 			return new ResponseEntity<Member>(m,HttpStatus.OK);
 			
 		}
-		@GetMapping("/memberByPan/{panNo}")
+		@GetMapping("/2_memberByPan/{panNo}")
 		public ResponseEntity<Member> getMemberByPan(@PathVariable("panNo") String pan){
 			
 			Member m=ms.getMemberByPanNo(pan);
@@ -102,7 +102,7 @@ public class UserController {
 			return new ResponseEntity<Member>(m,HttpStatus.OK);
 			
 		}
-		@GetMapping("/allmembers")
+		@GetMapping("/2_allmembers")
 		public ResponseEntity<List<Member>> getAllMember(){
 			
 			List<Member> m=ms.getAllMembers();
@@ -116,7 +116,7 @@ public class UserController {
 		@Autowired
 		private IdCardService idCardService;
 		
-		@GetMapping("/getpancard")
+		@GetMapping("/3_getpancard")
 		public ResponseEntity<PanCard> getPanCardByNumberHandler(@Valid @RequestParam String panNo){
 			
 			PanCard idCard = idCardService.getPanCardByNumber(panNo);
@@ -124,7 +124,7 @@ public class UserController {
 			return new ResponseEntity<PanCard>(idCard,HttpStatus.OK);
 		}
 		
-		@GetMapping("/getaddhar")
+		@GetMapping("/3_getaddhar")
 	    public ResponseEntity<AadharCard> getAadharCardNumberHandler(@Valid @RequestParam Long aadharNo) {
 	    	
 	        AadharCard idCard = idCardService.getAadharCardNumber(aadharNo);
@@ -134,7 +134,7 @@ public class UserController {
 	    }
 		
 		
-		@PostMapping("/addcard/{id}")
+		@PostMapping("/3_addcard/{id}")
 		public ResponseEntity<IdCard> addIdCardHandler(@Valid @RequestBody IdCard idCard ,@PathVariable("id") Integer id ,@RequestParam("key") String key) throws LoginException{
 			IdCard newCard =  idCardService.addIdCard(idCard, id,key);
 			
@@ -149,7 +149,7 @@ public class UserController {
 		private AppointmentService appointmentService;
 		
 		
-		@PostMapping("/appointments/{id}")
+		@PostMapping("/3_appointments/{id}")
 		public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody Appointment appointment ,@PathVariable("id") Integer id , @RequestParam("key") String key)throws LoginException{
 			
 			Appointment addedappontenment = appointmentService.addAppointment(appointment, id ,key);
@@ -159,7 +159,7 @@ public class UserController {
 		}
 	    
 	    
-		@GetMapping("/getappointment/{id}")
+		@GetMapping("/3_getappointment/{id}")
 		public ResponseEntity<Appointment> getAppointmentHandler(@Valid @PathVariable("id") Integer id){
 			
 			Appointment appointment = appointmentService.getAppointment(id);
@@ -168,7 +168,7 @@ public class UserController {
 		}
 		
 		
-		@PutMapping("/updateappointment")
+		@PutMapping("/3_updateappointment")
 		public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment appointment, @RequestParam("key") String key)throws LoginException{
 			
 			Appointment updateAppointment = appointmentService.updateAppointment(appointment ,key);
@@ -176,7 +176,7 @@ public class UserController {
 			return new ResponseEntity<Appointment>(updateAppointment,HttpStatus.OK);
 		}
 		
-		@DeleteMapping("/deleteappointment")
+		@DeleteMapping("/3_deleteappointment")
 		public ResponseEntity<Boolean> deleteAppointment(@Valid @RequestBody Appointment appointment, @RequestParam("key") String key)throws LoginException{
 			Boolean deleteAppointment = appointmentService.deleteAppointment(appointment,key);
 			
@@ -226,7 +226,7 @@ public class UserController {
 		@Autowired
 		private VaccineRegistrationService vaccineRegistrationService;
 		
-		@PostMapping("/register")
+		@PostMapping("/0_register")
 		public ResponseEntity<VaccineRegistration> addvaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration, @RequestParam("key") String key) throws VaccineRegistrationException ,LoginException{
 			
 			
@@ -234,7 +234,7 @@ public class UserController {
 			
 			return new ResponseEntity<VaccineRegistration>(registered,HttpStatus.CREATED);
 		}
-		@GetMapping("/getregistrationByMobile/{ph}")
+		@GetMapping("/0_getregistrationByMobile/{ph}")
 		public ResponseEntity<VaccineRegistration> getVaccineRegistration(@PathVariable("ph") long moblieno)throws VaccineRegistrationException{
 			
 			VaccineRegistration vr=vaccineRegistrationService.getVaccineRegistration(moblieno);
@@ -245,7 +245,7 @@ public class UserController {
 			
 		}
 		
-		@PutMapping("/updateRegistration")
+		@PutMapping("/0_updateRegistration")
 		public  ResponseEntity<VaccineRegistration> updateVaccineRegistration(@RequestBody VaccineRegistration reg)throws VaccineRegistrationException{
 			
 			
@@ -256,7 +256,7 @@ public class UserController {
 			
 			
 		}
-		@DeleteMapping("/vaccineRegistration/{MobileNo}")
+		@DeleteMapping("/0_vaccineRegistration/{MobileNo}")
 		public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("MobileNo") Long mobileNo ) throws VaccineRegistrationException{
 			Boolean deleteVaccineRegistration = vaccineRegistrationService.deleteVaccineRegistration(mobileNo);
 			
