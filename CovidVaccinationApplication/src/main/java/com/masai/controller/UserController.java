@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.exception.UserException;
 import com.masai.model.User;
 import com.masai.service.UserService;
 
@@ -16,23 +17,26 @@ import com.masai.service.UserService;
 @RestController
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
-	
-	@PostMapping("/signup")
-	public ResponseEntity<User> saveUser(@RequestBody User user){
-		User savedUser = userService.createUser(user);
-		
-		return new ResponseEntity<User>(savedUser,HttpStatus.CREATED);
-	}
-	
+	 @Autowired
+	    private UserService userService;
 
-	@PutMapping("/updateuser")
-    public ResponseEntity<User> updateUserHandler(@RequestBody User user,@RequestParam("uuid") String uuid){
-    	
-    	User updatedUser = userService.updateUser(user, uuid);
-    	
-    	return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
-    }
+	    @PostMapping("/users")
+	    public ResponseEntity<User> saveUserHandler(@RequestBody User user) throws UserException {
+
+	        User savedUser= userService.createUser(user);
+
+
+	        return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
+	    }
+
+	    @PutMapping("/users")
+	    public  ResponseEntity<User> updateUserHandler(@RequestBody User user,@RequestParam(required = false ) String key ) throws UserException {
+
+
+	        User updatedUser= userService.updateUser(user, key);
+
+	        return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
+
+	    }
 
 }

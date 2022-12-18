@@ -1,6 +1,6 @@
 package com.masai.exception;
 
-public class LoginException extends RuntimeException{
+public class LoginException extends Exception{
 	
 	public LoginException() {
 		
