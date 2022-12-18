@@ -7,6 +7,13 @@
 # Features
 
 # Tech Stack
+- Java
+- Spring Framework
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- MySQL
+- Swagger
 
 # Modules
 
