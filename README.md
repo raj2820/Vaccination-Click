@@ -2,6 +2,8 @@
 
 # ER Diagram
 
+<img src="covid19db.png">
+
 # REST API for Covid-19 Application
 
 # Features
