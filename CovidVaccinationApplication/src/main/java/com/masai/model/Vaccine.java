@@ -2,6 +2,7 @@ package com.masai.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Vaccine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
