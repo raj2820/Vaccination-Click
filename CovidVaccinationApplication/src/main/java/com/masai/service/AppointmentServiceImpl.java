@@ -126,6 +126,10 @@ public class AppointmentServiceImpl implements AppointmentService{
 			throw new AppointmentException("Invalid Appointment Id or appointment Id is not avaialabel");
 		}
 		
+		Slots slotStatus = appointment.getSlot();
+		slotStatus.setStatus(false);
+		
+		
 		Appointment deleteAppointment = optionalAppointment.get();
 		appointmentDao.delete(deleteAppointment);
 		return true;
