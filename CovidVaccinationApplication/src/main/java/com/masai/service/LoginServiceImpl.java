@@ -19,60 +19,59 @@ import net.bytebuddy.utility.RandomString;
 @Service
 public class LoginServiceImpl implements LoginService{
 
-	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private CurrentUserSessionDao currentUser;
-	
-	
-	
-	@Override
-	public String loginToAccount(LoginDTO loginDto) throws LoginException {
-		
-		User existingUser =  userDao.findByMobileNo(loginDto.getMobileNo());
-		
-		if(existingUser == null) {
-			throw new LoginException("Please Enter a valid Mobile Number, First create account then login");
-		}
-		
-		Optional<CurrentUserSession> ValidUsersessionOpt = currentUser.findById(existingUser.getUserId());
-		
-		if(ValidUsersessionOpt.isPresent()) {
-			
-			throw new LoginException("User already Logged In with this number :");
-		}
-		
-		if(existingUser.getPassword().equals(loginDto.getPassword())) {
-			
-			String key = RandomString.make(6);
-			
+	    @Autowired
+	    private UserDao userDAO;
 
-			CurrentUserSession currentUsersession = new CurrentUserSession(existingUser.getUserId(),key,LocalDateTime.now());
-			
-		    
-			currentUser.save(currentUsersession);
-			
-			return currentUsersession.toString();
-		}
-		else {
-			throw new LoginException("Please Enter a valid password");
-		}
-		
-	}
+	    @Autowired
+	    private CurrentUserSessionDao sessionDao;
 
-	@Override
-	public String logOutFromAccount(String key) throws LoginException {
-		
-		CurrentUserSession ValidUserSession = currentUser.findByUuid(key);
-		
-		if(ValidUserSession==null) {
-			throw new LoginException("User Not Logged In With This Number ");
+		@Override
+		public String logIntoAccount(LoginDTO dto) throws LoginException {
+			 User  existingUser=userDAO.findByMobileNo(dto.getMobileNo());
+
+		        if(existingUser==null){
+		            throw new LoginException("Please Enter a Valid Mobile No");
+		        }
+		        Optional<CurrentUserSession>  vaildUserSessionOpt =sessionDao.findById(existingUser.getUserId());
+
+		        if(vaildUserSessionOpt.isPresent()){
+		            throw new LoginException("User already Logged in with this number");
+		        }
+		        if(existingUser.getPassword().equals(dto.getPassword())) {
+
+		            String key= RandomString.make(6);
+
+
+
+		            CurrentUserSession currentUserSession = new CurrentUserSession(existingUser.getUserId(),key, LocalDateTime.now());
+
+		            sessionDao.save(currentUserSession);
+
+		            return currentUserSession.toString();
+		        }
+		        else
+		            throw new LoginException("Please Enter a valid password");
+
+		    }
+
+		@Override
+		public String logOutFromAccount(String key) throws LoginException {
+			  CurrentUserSession validUserSession = sessionDao.findByUuid(key);
+
+
+		        if(validUserSession == null) {
+		            throw new LoginException("User Not Logged In with this number");
+
+		        }
+
+
+		        sessionDao.delete(validUserSession);
+
+
+		        return "Logged Out !";
 		}
-		
-		currentUser.delete(ValidUserSession);
-		
-		return "Logged out !";
-	}
+
+
+	    
 
 }

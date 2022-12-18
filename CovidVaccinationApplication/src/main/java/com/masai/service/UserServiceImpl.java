@@ -15,43 +15,45 @@ import com.masai.repository.UserDao;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserDao userDao;
-	
-	
-	@Autowired
-	private CurrentUserSessionDao currentUser;
+    private UserDao cDao;
 
-	@Override
-	public User createUser(User user) throws UserException {
-		
-		User existingUser =userDao.findByMobileNo(user.getMobileNo());
-		
-		if(existingUser!=null) {
-			throw new UserException("User already registered with Mobile number :"+user.getMobileNo());
-		}
-		
-		return userDao.save(user);
-		
-	
-	}
+    @Autowired
+    private CurrentUserSessionDao sDao;
 
-	@Override
-	public User updateUser(User user, String key) throws UserException {
-		
-		CurrentUserSession loggedInUser = currentUser.findByUuid(key);
-		
-		if(loggedInUser==null) {
-			throw new UserException("Please provide a valid key to update a user");
-		}
-		
-		if(user.getUserId() == loggedInUser.getUserId()) {
-			return userDao.save(user);
-		}else {
-			throw new UserException("Invalid user Details ,Please login first");
-		}
-		
-	}
-	
+
+    @Override
+    public User createUser(User user) throws UserException {
+        User existingUser= cDao.findByMobileNo(user.getMobileNo());
+
+
+
+        if(existingUser != null)
+            throw new UserException("Customer Already Registered with Mobile number");
+
+
+
+
+        return cDao.save(user);
+    }
+
+    @Override
+    public User updateUser(User user, String key) throws UserException {
+        CurrentUserSession loggedInUser= sDao.findByUuid(key);
+
+        if(loggedInUser == null) {
+            throw new UserException("Please provide a valid key to update a customer");
+        }
+
+
+
+
+        if(user.getUserId() == loggedInUser.getUserId()) {
+
+            return cDao.save(user);
+        }
+        else
+            throw new UserException("Invalid Customer Details, please login first");
+    }
 	
 	
 	

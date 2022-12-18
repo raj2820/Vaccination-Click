@@ -16,50 +16,54 @@ import lombok.ToString;
 
 public class CurrentUserSession {
 	
-	@Id
-	@Column(unique = true)
-	private Integer userId;
-	
-	private String uuid;
-	
-	private LocalDateTime localDtaeTime;
+	    @Id
+	    @Column(unique = true)
+	    private Integer userId;
 
-	public CurrentUserSession() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDtaeTime) {
-		super();
-		this.userId = userId;
-		this.uuid = uuid;
-		this.localDtaeTime = localDtaeTime;
-	}
+	    private String uuid;
 
-	public Integer getUserId() {
-		return userId;
-	}
+	    private LocalDateTime localDateTime;
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+	    public CurrentUserSession() {
+	    }
 
-	public String getUuid() {
-		return uuid;
-	}
+	    public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDateTime) {
+	        this.userId = userId;
+	        this.uuid = uuid;
+	        this.localDateTime = localDateTime;
+	    }
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
+	    @Override
+	    public String toString() {
+	        return "CurrentUserSession{" +
+	                "userId=" + userId +
+	                ", uuid='" + uuid + '\'' +
+	                ", localDateTime=" + localDateTime +
+	                '}';
+	    }
 
-	public LocalDateTime getLocalDtaeTime() {
-		return localDtaeTime;
-	}
+	    public Integer getUserId() {
+	        return userId;
+	    }
 
-	public void setLocalDtaeTime(LocalDateTime localDtaeTime) {
-		this.localDtaeTime = localDtaeTime;
-	}
-	
-	
+	    public void setUserId(Integer userId) {
+	        this.userId = userId;
+	    }
 
+	    public String getUuid() {
+	        return uuid;
+	    }
+
+	    public void setUuid(String uuid) {
+	        this.uuid = uuid;
+	    }
+
+	    public LocalDateTime getLocalDateTime() {
+	        return localDateTime;
+	    }
+
+	    public void setLocalDateTime(LocalDateTime localDateTime) {
+	        this.localDateTime = localDateTime;
+	    }
 }
