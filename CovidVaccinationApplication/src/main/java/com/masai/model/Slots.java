@@ -17,7 +17,17 @@ public enum Slots {
         Random random = new Random();
         return values()[random.nextInt(values().length)];
     }
-	public Boolean[] map = new Boolean[9];
+	// public Boolean[] map = new Boolean[9];
+	
+	
+	private boolean status = false;
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 
 	
 }

@@ -15,7 +15,7 @@ import com.masai.repository.AppointmentDao;
 import com.masai.repository.MemberDao;
 import com.masai.repository.VaccinationCenterDao;
 import com.masai.repository.VaccineRegistrationDao;
-
+import com.masai.model.Slots;
 
 
 
@@ -54,6 +54,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	public Appointment addAppointment(Appointment appointment,Integer id) {
 		
 		
+		
 		VaccinationCenter center=null;
 	//List<Member> members =	memberDao.getAllMemberByPhone(appointment.getMobileNo());
 		Optional<VaccineRegistration> vc =vaccineRegistrationDao.findById(appointment.getMobileNo());
@@ -81,11 +82,27 @@ public class AppointmentServiceImpl implements AppointmentService{
 			
 		}
 		
-		
-		
-	appointment.setVaccinationCenter(center);
+			Slots newslots =  Slots.getRandomSlot();
+			if(newslots.isStatus()==false) {
+				newslots.setStatus(true);
+				appointment.setSlot(newslots);
+			}else {
+				while(newslots.isStatus()==false) {
+					if(newslots.isStatus()==false) {
+						
+						newslots.setStatus(true);
+						appointment.setSlot(newslots);
+						break;
+						
+					}
+					newslots =  Slots.getRandomSlot();
+				}
+			}
 	
-		 return appointmentDao.save(appointment);
+			appointment.setVaccinationCenter(center);
+		
+			
+			return appointmentDao.save(appointment);	
 	}
 
 	@Override
