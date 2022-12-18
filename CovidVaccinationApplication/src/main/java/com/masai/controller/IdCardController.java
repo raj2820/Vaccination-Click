@@ -1,5 +1,7 @@
 package com.masai.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.masai.model.AadharCard;
 import com.masai.model.IdCard;
+import com.masai.model.PanCard;
 import com.masai.service.IdCardService;
 
 @RestController
@@ -22,25 +25,25 @@ public class IdCardController {
 	
 	
 	@GetMapping("/getpancard")
-	public ResponseEntity<IdCard> getPanCardByNumberHandler(@RequestParam String panNo){
+	public ResponseEntity<PanCard> getPanCardByNumberHandler(@Valid @RequestParam String panNo){
 		
-		IdCard idCard = idCardService.getPanCardByNumber(panNo);
+		PanCard idCard = idCardService.getPanCardByNumber(panNo);
 		
-		return new ResponseEntity<IdCard>(idCard,HttpStatus.OK);
+		return new ResponseEntity<PanCard>(idCard,HttpStatus.OK);
 	}
 	
-//	@GetMapping("/getaddhar")
-//    public ResponseEntity<IdCard> getAadharCardNumberHandler(@RequestParam Long aadharNo) {
-//    	
-//        IdCard idCard = idCardService.getAadharCardNumber(aadharNo);
-//		
-//		return new ResponseEntity<IdCard>(idCard,HttpStatus.OK);
-//		
-//    }
+	@GetMapping("/getaddhar")
+    public ResponseEntity<AadharCard> getAadharCardNumberHandler(@Valid @RequestParam Long aadharNo) {
+    	
+        AadharCard idCard = idCardService.getAadharCardNumber(aadharNo);
+		
+		return new ResponseEntity<AadharCard>(idCard,HttpStatus.OK);
+		
+    }
 	
 	
 	@PostMapping("/addcard/{id}")
-	public ResponseEntity<IdCard> addIdCardHandler(@RequestBody IdCard idCard ,@PathVariable("id") Integer id){
+	public ResponseEntity<IdCard> addIdCardHandler(@Valid @RequestBody IdCard idCard ,@PathVariable("id") Integer id){
 		IdCard newCard =  idCardService.addIdCard(idCard, id);
 		
 		

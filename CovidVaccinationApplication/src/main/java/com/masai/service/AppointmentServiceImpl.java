@@ -36,22 +36,28 @@ public class AppointmentServiceImpl implements AppointmentService{
 	private VaccinationCenterDao vaccinationCenterDao;
 	
 	@Override
-	public List<Appointment> getAllAppointments() {
+	public List<Appointment> getAllAppointments() throws AppointmentException{
+		
+		
 		
 		List<Appointment> appointments = appointmentDao.findAll();
+		
+		if(appointments.isEmpty()) {
+			throw new AppointmentException("No Appointments Available");
+		}
 		return appointments;
 	}
 
 	@Override
-	public Appointment getAppointment(Integer bookingId) {
+	public Appointment getAppointment(Integer bookingId) throws AppointmentException{
 		
-		Appointment appointment = appointmentDao.findById(bookingId).orElseThrow(()->new IllegalArgumentException("Booking Id "+bookingId+" is Invalid or not availble."));
+		Appointment appointment = appointmentDao.findById(bookingId).orElseThrow(()->new AppointmentException("Booking Id "+bookingId+" is Invalid or not availble."));
 		
 		return appointment;
 	}
 
 	@Override
-	public Appointment addAppointment(Appointment appointment,Integer id) {
+	public Appointment addAppointment(Appointment appointment,Integer id)throws AppointmentException {
 		
 		
 		
@@ -59,13 +65,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 	//List<Member> members =	memberDao.getAllMemberByPhone(appointment.getMobileNo());
 		Optional<VaccineRegistration> vc =vaccineRegistrationDao.findById(appointment.getMobileNo());
 	
-	Member member =	memberDao.findById(id).get();
+		Member member =	memberDao.findById(id).get();
+		
 		appointment.setMember(member);
-		
-		
-		
-		
-		
 		
 		List<VaccinationCenter> centerList =	vaccinationCenterDao.findAll();
 		
@@ -106,7 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment) {
+	public Appointment updateAppointment(Appointment appointment) throws AppointmentException{
 		Optional<Appointment> optionalAppointment = appointmentDao.findById(appointment.getBookingId());
 		
 		if(optionalAppointment.isEmpty()) {
@@ -119,12 +121,16 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public boolean deleteAppointment(Appointment appointment) {
+	public boolean deleteAppointment(Appointment appointment)  throws AppointmentException{
 		Optional<Appointment> optionalAppointment = appointmentDao.findById(appointment.getBookingId());
 		
 		if(optionalAppointment.isEmpty()) {
 			throw new AppointmentException("Invalid Appointment Id or appointment Id is not avaialabel");
 		}
+		
+		Slots slotStatus = appointment.getSlot();
+		slotStatus.setStatus(false);
+		
 		
 		Appointment deleteAppointment = optionalAppointment.get();
 		appointmentDao.delete(deleteAppointment);

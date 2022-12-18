@@ -2,11 +2,13 @@ package com.masai.model;
 
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class PanCard {
 	
 
+	@NotNull(message = "PanCard should not be null")
 	private String panNo;
 
 

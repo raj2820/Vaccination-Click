@@ -11,9 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -28,8 +29,13 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private	Integer bookingId;
+	@NotNull
+	@Size(min = 9  , max = 10 , message = "Please Enter Valid Phone Number ")
 	private Long mobileNo;
-	private LocalDateTime dateofbooking=LocalDateTime.now();
+	
+	@NotNull
+	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDateTime dateofbooking;
 	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)

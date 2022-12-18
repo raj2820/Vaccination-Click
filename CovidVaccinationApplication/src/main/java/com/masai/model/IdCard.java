@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -19,11 +21,18 @@ public class IdCard {
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
+	@NotNull(message = "Name Should Not Be Empty")
 	private String name;
+	@NotNull(message = "DOB Should  Not Be Empty")
+	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate dob;
+	@NotNull(message = "Gender Should Not Be Empty")
 	private String gender;
+	@NotNull(message = "City Should Not Be Empty")
 	private String city;
+	@NotNull(message = "State Should Not Be Empty")
 	private String state;
+	@NotNull(message = "Pincode Should Not Be Empty")
 	private String pincode;
 	
 	@OneToOne(cascade = CascadeType.ALL)
