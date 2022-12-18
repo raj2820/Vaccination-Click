@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exception.AppointmentException;
+import com.masai.exception.LoginException;
 import com.masai.model.Appointment;
+import com.masai.model.CurrentUserSession;
 import com.masai.model.Member;
 import com.masai.model.VaccinationCenter;
 import com.masai.model.VaccineRegistration;
 import com.masai.repository.AppointmentDao;
+import com.masai.repository.CurrentUserSessionDao;
 import com.masai.repository.MemberDao;
 import com.masai.repository.VaccinationCenterDao;
 import com.masai.repository.VaccineRegistrationDao;
@@ -35,6 +38,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 	@Autowired
 	private VaccinationCenterDao vaccinationCenterDao;
 	
+	@Autowired
+	private CurrentUserSessionDao currentUserSessionDao;
+	
 	@Override
 	public List<Appointment> getAllAppointments() throws AppointmentException{
 		
@@ -57,8 +63,12 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment addAppointment(Appointment appointment,Integer id)throws AppointmentException {
-		
+	public Appointment addAppointment(Appointment appointment,Integer id,String key)throws AppointmentException,LoginException {
+		CurrentUserSession userCurrent=currentUserSessionDao.findByUuid(key);
+		if(userCurrent.equals(null)) {
+			
+			throw new LoginException("User not logged in");
+		}
 		
 		
 		VaccinationCenter center=null;
@@ -108,7 +118,15 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment) throws AppointmentException{
+	public Appointment updateAppointment(Appointment appointment,String key)throws AppointmentException,LoginException {
+		
+		
+		CurrentUserSession userCurrent=currentUserSessionDao.findByUuid(key);
+		if(userCurrent.equals(null)) {
+			
+			throw new LoginException("User not logged in");
+		}
+		
 		Optional<Appointment> optionalAppointment = appointmentDao.findById(appointment.getBookingId());
 		
 		if(optionalAppointment.isEmpty()) {
@@ -121,7 +139,16 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public boolean deleteAppointment(Appointment appointment)  throws AppointmentException{
+	public boolean deleteAppointment(Appointment appointment,String key)throws AppointmentException,LoginException {
+		
+		CurrentUserSession userCurrent=currentUserSessionDao.findByUuid(key);
+		if(userCurrent.equals(null)) {
+			
+			throw new LoginException("User not logged in");
+		}
+		
+		
+		
 		Optional<Appointment> optionalAppointment = appointmentDao.findById(appointment.getBookingId());
 		
 		if(optionalAppointment.isEmpty()) {

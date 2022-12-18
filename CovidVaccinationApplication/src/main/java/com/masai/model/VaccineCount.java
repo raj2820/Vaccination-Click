@@ -1,7 +1,12 @@
 package com.masai.model;
 
+import javax.validation.constraints.NotNull;
+
 public class VaccineCount {
+	
+	@NotNull(message="Quantity should not be 0")
 	private Integer quantity;
+	@NotNull(message="Quantity should not be null")
 	private Double price;
 
 

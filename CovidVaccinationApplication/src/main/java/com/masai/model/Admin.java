@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Admin {
@@ -11,9 +12,13 @@ public class Admin {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer adminId;
+	@NotNull(message="Admin name should not be empty")
     private String adminName;
+	@NotNull(message="Mobile should not be empty")
     private String adminMobileNo;
+	@NotNull(message="Admin Email should not be empty")
     private String adminEmail;
+	@NotNull(message="Admin Password should not be empty")
     private String adminPassword;
 
     public Admin() {

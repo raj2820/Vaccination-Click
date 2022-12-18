@@ -7,8 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -18,6 +22,7 @@ public class VaccineRegistration {
 	private Long mobileno;
 	//@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDateTime dateofregistration=LocalDateTime.now();
+	
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy ="vaccineRegistration")
@@ -31,13 +36,15 @@ public class VaccineRegistration {
 		this.mobileno = mobileno;
 	}
 
-//	public LocalDate getDateofregistration() {
-//		return dateofregistration;
-//	}
-//
-//	public void setDateofregistration(LocalDate dateofregistration) {
-//		this.dateofregistration = dateofregistration;
-//	}
+
+
+	public LocalDateTime getDateofregistration() {
+		return dateofregistration;
+	}
+
+	public void setDateofregistration(LocalDateTime dateofregistration) {
+		this.dateofregistration = dateofregistration;
+	}
 
 	public List<Member> getMemberList() {
 		return memberList;

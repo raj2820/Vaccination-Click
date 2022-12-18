@@ -8,10 +8,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.LoginException;
 import com.masai.exception.VaccineInventoryException;
+import com.masai.model.CurrentAdminSession;
 import com.masai.model.VaccinationCenter;
 import com.masai.model.Vaccine;
 import com.masai.model.VaccineInventory;
+import com.masai.repository.AdminDao;
+import com.masai.repository.AdminSessionDao;
+import com.masai.repository.CurrentUserSessionDao;
+import com.masai.repository.UserDao;
 import com.masai.repository.VaccinationCenterDao;
 import com.masai.repository.VaccineDao;
 import com.masai.repository.VaccineInventoryDao;
@@ -29,6 +35,22 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 	//private VaccineDao vaccineDao;
 	@Autowired
 	private VaccinationCenterDao vaccinationCenterDao;
+	
+	
+	
+	@Autowired
+	private CurrentUserSessionDao currentUserSessionDao;
+	
+	@Autowired
+	private AdminSessionDao adminSessionDao;
+
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private AdminSessionDao adminDao;
+	
+	
 	@Override
 	public List<VaccineInventory> allVaccineInventory() throws VaccineInventoryException{
 		
@@ -55,8 +77,17 @@ public class VaccineInventoryServiceImpl implements VaccinationInventoryService{
 	}
 
 	@Override
-	public VaccineInventory addVaccine(VaccineInventory vaccineInventory ,Integer id,Integer vcid) throws VaccineInventoryException {
+	public VaccineInventory addVaccine(VaccineInventory vaccineInventory ,Integer id,Integer vcid ,String key) throws VaccineInventoryException ,LoginException{
 		
+		CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
+
 	Optional<Vaccine> opt=	vaccineDao.findById(id);
 Optional<VaccinationCenter> vc=vaccinationCenterDao.findById(vcid);
 	
@@ -70,8 +101,17 @@ Optional<VaccinationCenter> vc=vaccinationCenterDao.findById(vcid);
 	}
 
 	@Override
-	public VaccineInventory updateVaccineInventory(VaccineInventory vaccineInventory) throws VaccineInventoryException {
-        Optional<VaccineInventory> existingOptional =  vaccineInventoryDao.findById(vaccineInventory.getInventoryId());
+	public VaccineInventory updateVaccineInventory(VaccineInventory vaccineInventory,String key) throws VaccineInventoryException,LoginException {
+       
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
+		
+		Optional<VaccineInventory> existingOptional =  vaccineInventoryDao.findById(vaccineInventory.getInventoryId());
 		
 		if(existingOptional.isPresent()) {
 			VaccineInventory existingInventory = existingOptional.get();
@@ -84,7 +124,15 @@ Optional<VaccinationCenter> vc=vaccinationCenterDao.findById(vcid);
 	}
 
 	@Override
-	public boolean deleteVaccineInventory(VaccineInventory vaccineInventory) throws VaccineInventoryException {
+	public boolean deleteVaccineInventory(VaccineInventory vaccineInventory ,String key) throws VaccineInventoryException ,LoginException{
+		
+CurrentAdminSession currentAdminSession = adminSessionDao.findByUuid(key);
+		
+		if(currentAdminSession.equals(null)) {
+			
+			throw new LoginException("Admin not logged in !");
+			
+		}
 		
 		Optional<VaccineInventory> existingOptional =  vaccineInventoryDao.findById(vaccineInventory.getInventoryId());
 		

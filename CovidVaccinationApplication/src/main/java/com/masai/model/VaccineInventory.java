@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,6 +23,7 @@ public class VaccineInventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer InventoryId;
 	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@NotNull(message="Date should not be null")
 	private LocalDate localDate;
 	
 
