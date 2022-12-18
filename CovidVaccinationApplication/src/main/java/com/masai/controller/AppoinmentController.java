@@ -2,6 +2,8 @@ package com.masai.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class AppoinmentController {
 	
 	
 	@PostMapping("/appointments/{id}")
-	public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment ,@PathVariable("id") Integer id){
+	public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody Appointment appointment ,@PathVariable("id") Integer id){
 		
 		Appointment addedappontenment = appointmentService.addAppointment(appointment, id);
 		
@@ -45,7 +47,7 @@ public class AppoinmentController {
 	
 	
 	@GetMapping("/getappointment/{id}")
-	public ResponseEntity<Appointment> getAppointmentHandler(@PathVariable("id") Integer id){
+	public ResponseEntity<Appointment> getAppointmentHandler(@Valid @PathVariable("id") Integer id){
 		
 		Appointment appointment = appointmentService.getAppointment(id);
 		
@@ -54,7 +56,7 @@ public class AppoinmentController {
 	
 	
 	@PutMapping("/updateappointment")
-	public ResponseEntity<Appointment> updateAppointment(@RequestBody Appointment appointment){
+	public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment appointment){
 		
 		Appointment updateAppointment = appointmentService.updateAppointment(appointment);
 		
@@ -62,7 +64,7 @@ public class AppoinmentController {
 	}
 	
 	@DeleteMapping("/deleteappointment")
-	public ResponseEntity<Boolean> deleteAppointment(@RequestBody Appointment appointment){
+	public ResponseEntity<Boolean> deleteAppointment(@Valid @RequestBody Appointment appointment){
 		Boolean deleteAppointment = appointmentService.deleteAppointment(appointment);
 		
 		return new ResponseEntity<Boolean>(deleteAppointment,HttpStatus.OK);

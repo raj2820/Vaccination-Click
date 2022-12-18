@@ -2,6 +2,7 @@ package com.masai.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 
 @Embeddable
@@ -9,12 +10,15 @@ public class AadharCard {
 	
 
 
+	@NotNull(message = "Aadhar Card should not be null")
 	@Column(unique = true)
 	private Long aadharNo;
 	
+	@NotNull(message = "Finger Prints should not be null")
 	@Column(unique = true)
 	private String fingerPrints;
 	
+	@NotNull(message = "Iris Scan should not be null")
 	@Column(unique = true)
 	private String irisScan;
 	

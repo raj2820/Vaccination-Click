@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exception.IdCardException;
+import com.masai.model.AadharCard;
 import com.masai.model.IdCard;
 import com.masai.model.Member;
+import com.masai.model.PanCard;
 import com.masai.repository.IdCardDao;
 import com.masai.repository.MemberDao;
 
@@ -24,38 +26,35 @@ public class IdCardSeviceImpl implements IdCardService{
 	private MemberDao mdao;
 
 	@Override
-	public IdCard getPanCardByNumber(String panNo) throws IdCardException {
+	public PanCard getPanCardByNumber(String panNo) throws IdCardException {
 		
-		List<IdCard> cardList = idCardDao.findAll();
-//		boolean flag = false;
 		
-		for(IdCard id : cardList) {
-			if(id.getPanCard().equals(panNo)) {
-//				flag=true;
-				return id;
-			}
+		Optional<IdCard> idCard = idCardDao.getMemberByPanCardNo(panNo);
+		
+		if(idCard.isEmpty()) {
+			throw new IdCardException("Invalid Pan Card Number");
 		}
-	
 		
-		throw new IdCardException("Please provide correct panNumber");
+		PanCard panCard = idCard.get().getPanCard();
+		
+		return panCard;
 		
 	}
 
-//	@Override
-//	public IdCard getAadharCardNumber(Long aadharNo) throws IdCardException {
-//		
-//		List<IdCard> cardList = idCardDao.findAll();
-//		
-//		for(IdCard id : cardList) {
-//			if(id.getAadharNo().equals(aadharNo)) {
-//
-//				return id;
-//			}
-//		}
-//		
-//		throw new IdCardException("Please provide correct addharNumber");
-//		
-//	}
+	@Override
+	public AadharCard getAadharCardNumber(Long aadharNo) throws IdCardException {
+		
+		Optional<IdCard> idCard = idCardDao.getMemberByAdharNo(aadharNo);
+		
+		if(idCard.isEmpty()) {
+			throw new IdCardException("Invalid Aadhar Card Number");
+		}
+		
+		AadharCard aadhar = idCard.get().getAdharcard();
+		
+		return aadhar;
+		
+	}
 
 	
 
