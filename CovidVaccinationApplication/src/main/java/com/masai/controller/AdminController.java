@@ -110,9 +110,9 @@ public class AdminController {
 		}
 		
 		@PutMapping("/vaccinationCenterAdmin")
-		public ResponseEntity<VaccinationCenter> updateVaccinationCenterHandlerAdmin(@Valid @RequestBody VaccinationCenter vacc) throws VaccinationCenterException{
+		public ResponseEntity<VaccinationCenter> updateVaccinationCenterHandlerAdmin(@Valid @RequestBody VaccinationCenter vacc ,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
-			VaccinationCenter updateVc =vcs.updateVaccineCenter(vacc);
+			VaccinationCenter updateVc =vcs.updateVaccineCenter(vacc,key);
 			
 			return new ResponseEntity<VaccinationCenter>(updateVc,HttpStatus.ACCEPTED);
 			
@@ -120,9 +120,9 @@ public class AdminController {
 		}
 		
 		@DeleteMapping("/vaccinationCenterAdmin/{code}")
-		public ResponseEntity<Boolean> deleteVaccinationCenterHandlerAdmin(@PathVariable("code") Integer code) throws VaccinationCenterException {
+		public ResponseEntity<Boolean> deleteVaccinationCenterHandlerAdmin(@PathVariable("code") Integer code ,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
-			Boolean deleteVc=vcs.deleteVaccineCenter(code);
+			Boolean deleteVc=vcs.deleteVaccineCenter(code,key);
 			
 			return new ResponseEntity<Boolean>(deleteVc,HttpStatus.OK);
 			
@@ -133,9 +133,9 @@ public class AdminController {
 		private VaccinationCenterService vaccinationCenterService;
 		
 		@PostMapping("/vcregisterAdmin")
-		public ResponseEntity<VaccinationCenter> addVaccinationCenterAdmin(@Valid @RequestBody VaccinationCenter vaccinationCenter) throws VaccinationCenterException{
+		public ResponseEntity<VaccinationCenter> addVaccinationCenterAdmin(@Valid @RequestBody VaccinationCenter vaccinationCenter,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
-			VaccinationCenter vc =	vaccinationCenterService.addVaccineCenter(vaccinationCenter);
+			VaccinationCenter vc =	vaccinationCenterService.addVaccineCenter(vaccinationCenter,key);
 			
 			return new ResponseEntity<VaccinationCenter>(vc,HttpStatus.CREATED);
 		}
@@ -162,18 +162,18 @@ public class AdminController {
 		
 		
 		@PostMapping("/vaccines")
-		public ResponseEntity<Vaccine> addVaccineToSystemHandlerAdmin(@Valid @RequestBody Vaccine vaccine){
+		public ResponseEntity<Vaccine> addVaccineToSystemHandlerAdmin(@Valid @RequestBody Vaccine vaccine ,@RequestParam("key")String key)throws LoginException{
 			
-		Vaccine savedvaccine =	vService.addVaccine(vaccine);
+		Vaccine savedvaccine =	vService.addVaccine(vaccine,key);
 			
 		return new ResponseEntity<Vaccine>(savedvaccine,HttpStatus.CREATED);
 			
 		}
 		
 		@PutMapping("/vaccines")
-		public ResponseEntity<Vaccine> updateVaccineGandlerAdmin(@RequestBody Vaccine vaccine){
+		public ResponseEntity<Vaccine> updateVaccineGandlerAdmin(@RequestBody Vaccine vaccine ,@RequestParam("key") String key)throws LoginException{
 			
-		Vaccine savedvaccine =	vService.updateVaccine(vaccine);
+		Vaccine savedvaccine =	vService.updateVaccine(vaccine,key);
 			
 		return new ResponseEntity<Vaccine>(savedvaccine,HttpStatus.CREATED);
 			

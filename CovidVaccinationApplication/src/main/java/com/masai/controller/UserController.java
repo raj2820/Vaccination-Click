@@ -150,9 +150,9 @@ public class UserController {
 		
 		
 		@PostMapping("/appointments/{id}")
-		public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody Appointment appointment ,@PathVariable("id") Integer id){
+		public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody Appointment appointment ,@PathVariable("id") Integer id , @RequestParam("key") String key)throws LoginException{
 			
-			Appointment addedappontenment = appointmentService.addAppointment(appointment, id);
+			Appointment addedappontenment = appointmentService.addAppointment(appointment, id ,key);
 			
 			return new ResponseEntity<Appointment>(addedappontenment,HttpStatus.CREATED);
 			
@@ -169,16 +169,16 @@ public class UserController {
 		
 		
 		@PutMapping("/updateappointment")
-		public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment appointment){
+		public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment appointment, @RequestParam("key") String key)throws LoginException{
 			
-			Appointment updateAppointment = appointmentService.updateAppointment(appointment);
+			Appointment updateAppointment = appointmentService.updateAppointment(appointment ,key);
 			
 			return new ResponseEntity<Appointment>(updateAppointment,HttpStatus.OK);
 		}
 		
 		@DeleteMapping("/deleteappointment")
-		public ResponseEntity<Boolean> deleteAppointment(@Valid @RequestBody Appointment appointment){
-			Boolean deleteAppointment = appointmentService.deleteAppointment(appointment);
+		public ResponseEntity<Boolean> deleteAppointment(@Valid @RequestBody Appointment appointment, @RequestParam("key") String key)throws LoginException{
+			Boolean deleteAppointment = appointmentService.deleteAppointment(appointment,key);
 			
 			return new ResponseEntity<Boolean>(deleteAppointment,HttpStatus.OK);
 			
