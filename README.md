@@ -1,4 +1,4 @@
-# safe-group-8195
+# Vaccination Click
 
 # ER Diagram
 
@@ -42,12 +42,12 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.username=root
 spring.datasource.password=root
 
- #ORM s/w specific properties
+
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
--spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
+spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
 # API Root Endpoint
 https://localhost:8880/
 
-http://localhost:8880/swagger-ui/
+http://localhost:8880/swagger-ui/index.html
