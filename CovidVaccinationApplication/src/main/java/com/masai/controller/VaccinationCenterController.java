@@ -75,14 +75,14 @@ public class VaccinationCenterController {
 	}
 	
 	
-	@PostMapping("/vaccinationCenter")
-	public ResponseEntity<VaccinationCenter>  addVaccinationCenterHandler(@RequestBody VaccinationCenter vacc){
-		
-		VaccinationCenter vc=vcs.addVaccineCenter(vacc);
-		
-		return new ResponseEntity<VaccinationCenter>(vc,HttpStatus.CREATED);
-		
-	}
+//	@PostMapping("/vaccinationCenter")
+//	public ResponseEntity<VaccinationCenter>  addVaccinationCenterHandler(@RequestBody VaccinationCenter vacc){
+//		
+//		VaccinationCenter vc=vcs.addVaccineCenter(vacc);
+//		
+//		return new ResponseEntity<VaccinationCenter>(vc,HttpStatus.CREATED);
+//		
+//	}
 	
 	@PutMapping("/vaccinationCenter")
 	public ResponseEntity<VaccinationCenter> updateVaccinationCenterHandler(@RequestBody VaccinationCenter vacc) throws VaccinationCenterException{

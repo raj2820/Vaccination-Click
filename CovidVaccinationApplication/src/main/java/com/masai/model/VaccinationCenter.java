@@ -1,5 +1,7 @@
 package com.masai.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class VaccinationCenter {
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vaccineCode;
@@ -26,12 +27,31 @@ public class VaccinationCenter {
 	private String pincode;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="vaccinationCenter")
 	private VaccineInventory vaccineInventory;
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "vaccinationCenter")
+	private List<Appointment> appointments;
 	
 	public VaccinationCenter() {
 	
+	}
+
+	public VaccineInventory getVaccineInventory() {
+		return vaccineInventory;
+	}
+
+	public void setVaccineInventory(VaccineInventory vaccineInventory) {
+		this.vaccineInventory = vaccineInventory;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 	public VaccinationCenter(Integer vaccineCode, String centerName, String address, String city, String state,
@@ -98,6 +118,7 @@ public class VaccinationCenter {
 		return "VaccinationCenter [vaccineCode=" + vaccineCode + ", centerName=" + centerName + ", address=" + address
 				+ ", city=" + city + ", state=" + state + ", pincode=" + pincode + "]";
 	}
+	
 	
 
 }

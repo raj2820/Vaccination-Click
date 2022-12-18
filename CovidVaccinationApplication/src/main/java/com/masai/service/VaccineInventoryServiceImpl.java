@@ -1,6 +1,7 @@
 package com.masai.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,10 +104,30 @@ Optional<VaccinationCenter> vc=vaccinationCenterDao.findById(vcid);
 		return null;
 	}
 
-//	@Override
-//	public List<VaccineInventory> getVaccineInventory(Vaccine vaccine) throws VaccineInventoryException {
-//		
-//		return null;
-//	}
+	@Override
+	public List<VaccineInventory> getVaccineInventory(Vaccine vaccine) throws VaccineInventoryException {
+
+		List<VaccineInventory> inventories = vaccineInventoryDao.findAll();
+//		List<VaccineInventory> inventories = vaccineInventoryDao.findByVaccine();
+		List<VaccineInventory> allInventory = new ArrayList<>();
+
+
+		
+		for (VaccineInventory vaccineInventory : inventories) {
+			if(vaccineInventory.getVaccine().getVaccineName().equals(vaccine.getVaccineName())) {
+				allInventory.add(vaccineInventory);
+			}
+			
+			
+			
+		}
+		
+		if(allInventory.isEmpty()) {
+			throw new VaccineInventoryException("No inventory with vaccineName :"+vaccine.getVaccineName());
+		}
+		
+		return allInventory;
+
+	}
 
 }

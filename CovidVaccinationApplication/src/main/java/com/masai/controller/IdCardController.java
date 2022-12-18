@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +39,12 @@ public class IdCardController {
 //    }
 	
 	
-	@PostMapping("/addcard")
-	public ResponseEntity<IdCard> addIdCardHandler(@RequestBody IdCard idCard){
-		IdCard newCard =  idCardService.addIdCard(idCard);
+	@PostMapping("/addcard/{id}")
+	public ResponseEntity<IdCard> addIdCardHandler(@RequestBody IdCard idCard ,@PathVariable("id") Integer id){
+		IdCard newCard =  idCardService.addIdCard(idCard, id);
+		
 		
 		return new ResponseEntity<IdCard>(newCard,HttpStatus.CREATED);
 	}
-
 
 }

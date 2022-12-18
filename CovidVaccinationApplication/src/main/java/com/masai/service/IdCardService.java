@@ -10,5 +10,5 @@ public interface IdCardService {
 	
 //	public IdCard getAadharCardNumber(Long aadharNo) throws IdCardException;
 	
-	public IdCard addIdCard(IdCard idCard)throws IdCardException;
+	public IdCard addIdCard(IdCard idcard ,Integer id); 
 }
