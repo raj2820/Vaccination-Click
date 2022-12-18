@@ -33,9 +33,10 @@ public class Appointment {
 	@Size(min = 9  , max = 10 , message = "Please Enter Valid Phone Number ")
 	private Long mobileNo;
 	
-	@NotNull
+	
 	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDateTime dateofbooking;
+	
 	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
