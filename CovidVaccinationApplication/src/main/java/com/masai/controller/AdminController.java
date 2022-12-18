@@ -41,7 +41,7 @@ public class AdminController {
 	 @Autowired
 	 private AdminService adminService;
 	 
-	 @PostMapping("/admins")
+	 @PostMapping("/1_admins")
 	   public ResponseEntity<Admin> saveAdminHandlerAdmin(@Valid @RequestBody Admin admin) throws AdminException {
 
 	        Admin savedAdmin= adminService.createAdmin(admin);
@@ -49,7 +49,7 @@ public class AdminController {
 
 	        return new ResponseEntity<Admin>(savedAdmin, HttpStatus.CREATED);
 	    }
-	 @PutMapping("/admins")
+	 @PutMapping("/1_admins")
 	    public  ResponseEntity<Admin> updateUserHandler(@Valid @RequestBody Admin admin,@RequestParam(required = false ) String key ) throws AdminException {
 
 
@@ -76,7 +76,7 @@ public class AdminController {
 		
 		@Autowired
 		private VaccinationCenterService vcs;
-		@GetMapping("/vaccinationCenterAdmin/{code}")
+		@GetMapping("/3_vaccinationCenterAdmin/{code}")
 		public ResponseEntity<VaccinationCenter> getVaccineCenterHandlerAdmin( @PathVariable("code") Integer code) throws VaccinationCenterException{
 			
 			VaccinationCenter vc=vcs.getVaccineCenter(code);
@@ -85,7 +85,7 @@ public class AdminController {
 			
 		}
 		
-		@GetMapping("/vaccinationCenterbystateAdmin/{state}")
+		@GetMapping("/3_vaccinationCenterbystateAdmin/{state}")
 		public ResponseEntity<List<VaccinationCenter>> getVaccineCenterByStateHandlerAdmin(@PathVariable("state") String state) throws VaccinationCenterException{
 			
 			List<VaccinationCenter> vc=vcs.getVaccineCenterByState(state);
@@ -93,7 +93,7 @@ public class AdminController {
 			return new ResponseEntity<List<VaccinationCenter>>(vc,HttpStatus.OK);
 		}
 		
-		@GetMapping("/vaccinationCenterbycityAdmin/{city}")
+		@GetMapping("/3_vaccinationCenterbycityAdmin/{city}")
 		public ResponseEntity<List<VaccinationCenter>> getVaccineCenterByCityHandlerAdmin(@PathVariable("city") String city) throws VaccinationCenterException{
 			
 			List<VaccinationCenter> vc=vcs.getVaccineCenterByCity(city);
@@ -101,7 +101,7 @@ public class AdminController {
 			return new ResponseEntity<List<VaccinationCenter>>(vc,HttpStatus.OK);
 		}
 		
-		@GetMapping("/vaccinationCenterAdmin")
+		@GetMapping("/3_vaccinationCenterAdmin")
 		public ResponseEntity<List<VaccinationCenter>> getAllVaccinationCenterHandlerAdmin() throws VaccinationCenterException{
 			
 			List<VaccinationCenter> vc=vcs.getAllVaccineCenter();
@@ -109,7 +109,7 @@ public class AdminController {
 			return new ResponseEntity<List<VaccinationCenter>>(vc,HttpStatus.OK);
 		}
 		
-		@PutMapping("/vaccinationCenterAdmin")
+		@PutMapping("/3_vaccinationCenterAdmin")
 		public ResponseEntity<VaccinationCenter> updateVaccinationCenterHandlerAdmin(@Valid @RequestBody VaccinationCenter vacc ,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
 			VaccinationCenter updateVc =vcs.updateVaccineCenter(vacc,key);
@@ -119,7 +119,7 @@ public class AdminController {
 			
 		}
 		
-		@DeleteMapping("/vaccinationCenterAdmin/{code}")
+		@DeleteMapping("/3_vaccinationCenterAdmin/{code}")
 		public ResponseEntity<Boolean> deleteVaccinationCenterHandlerAdmin(@PathVariable("code") Integer code ,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
 			Boolean deleteVc=vcs.deleteVaccineCenter(code,key);
@@ -132,7 +132,7 @@ public class AdminController {
 		@Autowired
 		private VaccinationCenterService vaccinationCenterService;
 		
-		@PostMapping("/vcregisterAdmin")
+		@PostMapping("/3_VaccineCenterregisterAdmin")
 		public ResponseEntity<VaccinationCenter> addVaccinationCenterAdmin(@Valid @RequestBody VaccinationCenter vaccinationCenter,@RequestParam("key")String key) throws VaccinationCenterException,LoginException{
 			
 			VaccinationCenter vc =	vaccinationCenterService.addVaccineCenter(vaccinationCenter,key);
@@ -145,7 +145,7 @@ public class AdminController {
 		@Autowired
 		private VaccineRegistrationService vaccineRegistrationService;
 		
-		@GetMapping("/allregisteration")
+		@GetMapping("/2allregisteration")
 		public ResponseEntity<List<Member>> getAllRegistrationsAdmin() throws VaccineRegistrationException{
 			List<Member> members=vaccineRegistrationService.getAllMemberList();
 			
@@ -161,7 +161,7 @@ public class AdminController {
 		private VaccineService vService;
 		
 		
-		@PostMapping("/vaccines")
+		@PostMapping("/2_vaccines")
 		public ResponseEntity<Vaccine> addVaccineToSystemHandlerAdmin(@Valid @RequestBody Vaccine vaccine ,@RequestParam("key")String key)throws LoginException{
 			
 		Vaccine savedvaccine =	vService.addVaccine(vaccine,key);
@@ -170,7 +170,7 @@ public class AdminController {
 			
 		}
 		
-		@PutMapping("/vaccines")
+		@PutMapping("/2_vaccines")
 		public ResponseEntity<Vaccine> updateVaccineGandlerAdmin(@RequestBody Vaccine vaccine ,@RequestParam("key") String key)throws LoginException{
 			
 		Vaccine savedvaccine =	vService.updateVaccine(vaccine,key);
@@ -180,7 +180,7 @@ public class AdminController {
 		}
 		
 		
-		@GetMapping("/vaccines/{vaccinename}")
+		@GetMapping("/2_vaccines/{vaccinename}")
 		public ResponseEntity<Vaccine> getVaccineByNameHandlerAdmin(@PathVariable("vaccinename") String vaccinename){
 			
 		Vaccine savedvaccine =	vService.getVaccinByName(vaccinename);
@@ -189,7 +189,7 @@ public class AdminController {
 			
 		}
 		
-		@GetMapping("/vaccinesById/{vaccinid}")
+		@GetMapping("/2_vaccinesById/{vaccinid}")
 		public ResponseEntity<Vaccine> getVaccineByIDHandlerAdmin(@PathVariable("vaccinid") Integer vaccinid){
 			
 		Vaccine savedvaccine =	vService.getVaccineById(vaccinid);
@@ -198,7 +198,7 @@ public class AdminController {
 			
 		}
 		
-		@GetMapping("/vaccines")
+		@GetMapping("/2_vaccines")
 		public ResponseEntity<List<Vaccine>> getAllVaccineHandlerAdmin(){
 			
 		List<Vaccine> list =	vService.getAllVaccine();
@@ -213,7 +213,7 @@ public class AdminController {
 		
 
 		
-		@GetMapping("/inventories")
+		@GetMapping("/4_inventories")
 		public ResponseEntity<List<VaccineInventory>> getAllVaccineInvetoryHandlerAdmin(){
 			
 			List<VaccineInventory> vaccines = vaccineInventoryServise.allVaccineInventory();
@@ -221,7 +221,7 @@ public class AdminController {
 			return new ResponseEntity<List<VaccineInventory>>(vaccines,HttpStatus.OK);
 		}
 		
-		@GetMapping("/inventories/{centerId}")
+		@GetMapping("/4_inventories/{centerId}")
 		public ResponseEntity<VaccineInventory> getVaccineInventoryByCenterHandlerAdmin(@PathVariable("centerId") Integer centerId){
 			
 			VaccineInventory vaccineInventory =  vaccineInventoryServise.getVaccineInventoryByCenter(centerId);
@@ -229,7 +229,7 @@ public class AdminController {
 			return new ResponseEntity<VaccineInventory>(vaccineInventory,HttpStatus.FOUND);
 		}
 		
-		@PostMapping("/addvaccine/{id}/{vcid}")
+		@PostMapping("/4_addvaccine/{id}/{vcid}")
 		public ResponseEntity<VaccineInventory> addVaccineHandlerAdmin(@RequestBody VaccineInventory vaccineInventory,@RequestParam("key")String key ,@PathVariable("id") Integer id ,@PathVariable("vcid") Integer vcid)throws LoginException{
 			
 			VaccineInventory Inventory =  vaccineInventoryServise.addVaccine(vaccineInventory, id,vcid,key);
@@ -238,7 +238,7 @@ public class AdminController {
 			return new ResponseEntity<VaccineInventory>(Inventory,HttpStatus.OK);
 		}
 		
-		@PostMapping("/updateinventories")
+		@PostMapping("/4_updateinventories")
 		public ResponseEntity<VaccineInventory> updateVaccineInventoryHandlerAdmin(@RequestBody VaccineInventory vaccineInventory,@RequestParam("key") String key)throws LoginException{
 			
 			VaccineInventory Inventory =  vaccineInventoryServise.updateVaccineInventory(vaccineInventory,key);
@@ -249,7 +249,7 @@ public class AdminController {
 		
 		
 		
-		@DeleteMapping("/deleteinventories")
+		@DeleteMapping("/4_deleteinventories")
 		public ResponseEntity<Boolean> deleteVaccineInventoryHandlerAdmin(@RequestBody VaccineInventory vaccineInventory,@RequestParam("key") String key)throws LoginException{
 			
 			Boolean Inventory =  vaccineInventoryServise.deleteVaccineInventory(vaccineInventory,key);
@@ -262,7 +262,7 @@ public class AdminController {
 
 		
 		
-		@GetMapping("/getallinventorybydate/{date}")
+		@GetMapping("/4_getallinventorybydate/{date}")
 		public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByDateHandlerAdmin(@PathVariable("date") LocalDate date){
 			
 			List<VaccineInventory> allInventory =  vaccineInventoryServise.getVaccineInventoryByDate(date);
@@ -273,7 +273,7 @@ public class AdminController {
 
 		
 		
-		@GetMapping("/getinventories")
+		@GetMapping("/4_getinventories")
 		public ResponseEntity<List<VaccineInventory>> getVaccineInventoryHandlerAdmin(@RequestBody Vaccine vaccine)throws VaccineInventoryException{
 			
 			List<VaccineInventory> inventoryList =  vaccineInventoryServise.getVaccineInventory(vaccine);
