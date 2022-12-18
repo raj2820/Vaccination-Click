@@ -16,6 +16,9 @@
 - Swagger
 
 # Modules
+- Login, Logout Module
+- User Module
+- Admin Module
 
 # Contributors
 - <a href="https://github.com/raj2820">Raj Shinde</a>
