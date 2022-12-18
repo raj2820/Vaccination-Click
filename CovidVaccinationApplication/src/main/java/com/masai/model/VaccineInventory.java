@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
-
 public class VaccineInventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
