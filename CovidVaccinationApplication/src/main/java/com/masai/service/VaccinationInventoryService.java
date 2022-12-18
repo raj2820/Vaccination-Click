@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.masai.exception.VaccineInventoryException;
+import com.masai.model.Vaccine;
 import com.masai.model.VaccineInventory;
 
 
@@ -22,7 +23,7 @@ public VaccineInventory addVaccine(VaccineInventory vaccineInventory,Integer id 
 	
 	public List<VaccineInventory> getVaccineInventoryByDate(LocalDate date)throws VaccineInventoryException;
 	
-	//public List<VaccineInventory> getVaccineInventory(Vaccine vaccine)throws VaccineInventoryException;
+	public List<VaccineInventory> getVaccineInventory(Vaccine vaccine)throws VaccineInventoryException;
 
 	
 }

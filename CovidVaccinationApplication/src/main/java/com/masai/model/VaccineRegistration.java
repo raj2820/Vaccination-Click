@@ -1,6 +1,7 @@
 package com.masai.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,8 +16,8 @@ public class VaccineRegistration {
 	
 	@Id
 	private Long mobileno;
-	@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private LocalDate dateofregistration;
+	//@JsonFormat(shape =JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDateTime dateofregistration=LocalDateTime.now();
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy ="vaccineRegistration")
@@ -30,13 +31,13 @@ public class VaccineRegistration {
 		this.mobileno = mobileno;
 	}
 
-	public LocalDate getDateofregistration() {
-		return dateofregistration;
-	}
-
-	public void setDateofregistration(LocalDate dateofregistration) {
-		this.dateofregistration = dateofregistration;
-	}
+//	public LocalDate getDateofregistration() {
+//		return dateofregistration;
+//	}
+//
+//	public void setDateofregistration(LocalDate dateofregistration) {
+//		this.dateofregistration = dateofregistration;
+//	}
 
 	public List<Member> getMemberList() {
 		return memberList;
@@ -50,13 +51,8 @@ public class VaccineRegistration {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-//
-	public VaccineRegistration(Long mobileno, LocalDate dateofregistration, List<Member> memberList) {
-		super();
-		this.mobileno = mobileno;
-		this.dateofregistration = dateofregistration;
-		this.memberList = memberList;
-	}
+
+
 
 	@Override
 	public String toString() {

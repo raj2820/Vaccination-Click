@@ -7,9 +7,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.UserException;
 import com.masai.exception.VaccineRegistrationException;
+import com.masai.model.CurrentUserSession;
 import com.masai.model.Member;
 import com.masai.model.VaccineRegistration;
+import com.masai.repository.CurrentUserSessionDao;
 import com.masai.repository.MemberDao;
 import com.masai.repository.VaccineRegistrationDao;
 
@@ -22,6 +25,9 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private CurrentUserSessionDao currentUserSessionDao;
 
 //	@Override
 //	public VaccineRegistration getVaccineRegistration(long mobileno) throws VaccineRegistrationException {
@@ -47,12 +53,13 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 
 	@Override
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException {
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg  ) throws VaccineRegistrationException {
 		
 
-		VaccineRegistration addVaccineRegistration = vaccineRegistrationDao.save(reg);
+		
+	VaccineRegistration addVaccineRegistration = vaccineRegistrationDao.save(reg);
 
-		return addVaccineRegistration;
+	return addVaccineRegistration;
 	}
 	
 //
