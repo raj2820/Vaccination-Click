@@ -5,8 +5,24 @@
 <img src="covid19db.png">
 
 # REST API for Covid-19 Application
+We have developed this REST API for an Covid-19 Application. This API performs all the fundamental CRUD operations of any Covid-19 Application platform with user validation at every step.
+
+# Modules
+- Login, Logout Module
+- User Module
+- Admin Module
 
 # Features
+* User and Admin authentication & validation with session uuid.
+- Admin Features:
+Administrator Role of the entire application
+Admin can access the details of different Member ,Vaccine Center ,Vaccine Inventory and Vaccine Ragistration.
+
+- User Features:
+A user can register himself or herself on the platform.
+User can check the vaccine centres and vaccine availabilty.
+User can register for vaccine. User can register more then one member.
+After booking an appointment, he will get appointment details for the vaccine dose.
 
 # Tech Stack
 - Java
@@ -17,10 +33,7 @@
 - MySQL
 - Swagger
 
-# Modules
-- Login, Logout Module
-- User Module
-- Admin Module
+
 
 # Contributors
 - <a href="https://github.com/raj2820">Raj Shinde</a>
