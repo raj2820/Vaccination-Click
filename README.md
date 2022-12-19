@@ -22,6 +22,7 @@ Administrator Role of the entire application
 Admin can access the details of different Member ,Vaccine Center ,Vaccine Inventory and Vaccine Ragistration.
 
 * User Features:
+
 A user can register himself or herself on the platform.
 
 User can check the vaccine centres and vaccine availabilty.
